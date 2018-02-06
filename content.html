@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="browsermode" content="application"/>
+    <title>投票管理</title>
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/index.css">   
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+    <script src="js/index.js"></script>
+</head>
+<body class="content-all">
+    <header class="header-1">
+        <a href="javascript:history.go(-1)" class="goback"><</a>
+        <h4>投票详情</h4>
+        <a class="special">更多</a>
+    </header>
+    <article class="artical">
+        <div class="xinxi">
+            <a href="my.html">
+                <img  src="../image/add1.png"/>
+                <p class="xinxi-desc">
+                    <span class="nicheng">农药</span>
+                    <span class="begin">发布时间：2018.01.31 10.10</span>
+                </p>
+            </a>
+        </div>
+        <div class="main">
+            <div class="main-top">
+                <h5 class="title">2016年中国房地产上市公司领军人物评选</h5>
+                <p class="time">
+                    <span class="begin">开始时间：2018.01.27</span>
+                    <span class="end">结束时间：2018.02.10</span>
+                </p>
+                <p class="desc">web前端不知不觉悄悄占领了高地，无论是招聘需求还是工资上都是一股傲娇的劲头，于是技术宅们又开始骚动，一场场前端学习公开课开始爆发，但是为什么你还没有成为一个攻城狮？原因只在学的太多做的太少，标签语法都记得，自己动手写不出来，本套课程不讲概念纯案例实战，案例写的多，自然而然就会了，案例太多你准备好了么。</p>
+                <img src="image/biaotitu.png" class="title-img"/>
+                <img src="image/biaotitu.png" class="title-img"/>
+            </div>
+            <div class="main-middle">
+                <div class="niming">
+                    <p class="niming-left">
+                        <span>匿名投票</span>
+                        <span class="dan">(单选)</span>
+                        <!-- <span class="duo">(多选)</span> -->
+                    </p>
+                    <p class="niming-rigth">
+                        <span>28<span>人参与投票</span></span>
+                    </p>
+                </div>
+                <ul class="tup-xuanxiang">
+                    <li>
+                        <img src="image/biaotitu.png" class="xuxiang-img"/>
+                        <div class="fuceng">
+                            <span>这都是一些什么啊</span>
+                            <img src="../image/wxz.png" alt="">
+                        </div>
+                        <p class="xuanxiang-desc">
+                            <progress class="processbar" max="100" value="22"></progress>
+                            <label>22</label>
+                        </p>
+                    </li>
+                    <li>
+                        <img src="image/biaotitu.png" class="xuxiang-img"/>
+                        <div class="fuceng">
+                                <span>这都是一些什么啊</span>
+                            <img src="../image/wxz.png" alt="">
+                        </div>
+                        <p class="xuanxiang-desc">
+                            <progress class="processbar" max="100" value="22"></progress>
+                            <label>22</label>
+                        </p>
+                    </li>
+                    <li>
+                        <img src="image/biaotitu.png" class="xuxiang-img"/>
+                        <div class="fuceng">
+                            <span>这都是一些什么啊这都是一些什么啊</span>
+                            <img src="../image/wxz.png" alt="">
+                        </div>
+                        <p class="xuanxiang-desc">
+                            <progress class="processbar" max="100" value="22"></progress>
+                            <label>22</label>
+                        </p>
+                    </li>
+                    <li>
+                        <img src="image/biaotitu.png" class="xuxiang-img"/>
+                        <div class="fuceng">
+                            <span>这都是一些什么啊</span>
+                            <img src="../image/wxz.png" alt="">
+                        </div>
+                        <p class="xuanxiang-desc">
+                            <progress class="processbar" max="100" value="22"></progress>
+                            <label>22</label>
+                        </p>
+                    </li>
+                </ul>
+                <!-- <ul class="wenzi-xuanxiang">
+                    <li>
+                        <span class="xx">赠的打发打发，喵某几个如而入佳能尼康</span>
+                        <span class="check"></span>
+                        <p class="xuanxiang-desc">
+                            <progress class="processbar" max="100" value="22"></progress>
+                            <label>22</label>
+                        </p>
+                    </li>
+                    <li>
+                        <span  class="xx">敬爱的沙发客瓜分德国的刚开始的风格但是风格的身份广东省分公司地方</span>
+                        <span class="check"></span>
+                        <p class="xuanxiang-desc">
+                            <progress class="processbar" max="100" value="44"></progress>
+                            <label>44</label>
+                        </p>
+                    </li>
+                </ul> -->
+            </div>
+            <button class="toupiao">我要投票</button>
+        </div>
+    </article>
+    <div class="shanchu" style="display:none">
+        <ul>
+            <li id="bianji"><a href="">编辑</a></li>
+            <li id="shanchu"><a href="">删除</a></li>
+            <li id="zhiding"><a href="">置顶</a></li>
+            <li id="quxiao">取消</li>
+        </ul>
+    </div>
+    <div class="mask" style="display:none"></div>
+
+</body>
+</html>
