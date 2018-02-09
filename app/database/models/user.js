@@ -37,6 +37,10 @@ let userSchema = new Schema({
 		type: String,
 		default: ""
 	},	
+	"initiate": {
+		type: Number,
+		default: "1"
+	},
 	"meta": {
 		createAt: {
 			type: Date,
@@ -139,6 +143,7 @@ userSchema.statics = {
 					'desc': user.desc,
 					'dName': user.dName,
 					'level': user.level,
+					'initiate':user.initiate
 				});
 			}
 		});

@@ -13,18 +13,25 @@
 .header-1 a.goback {
   display: inline-block;
   width: 20%;
+  height: 44px;
   padding-left: 10px;
-  color: #fff;
+  float: left;
+  background: url("../image/fh.png") no-repeat;
+  background-size: 18%;
+  background-position: 15px 10px;
 }
 .header-1 h4 {
   display: inline-block;
   width: 60%;
   text-align: center;
+  font-size: 18px;
+  float: left;
 }
 .header-1 a.special {
   display: inline-block;
   width: 16%;
   text-align: center;
+  font-size: 14px;
 }
 .header-1 a.list-qx {
   display: inline-block;
@@ -40,11 +47,12 @@
 }
 .header-3 {
   width: 100%;
-  height: 50px;
-  line-height: 50px;
+  height: 44px;
+  line-height: 44px;
   background: #3d8cf8;
   color: #fff;
   text-align: center;
+  font-size: 18px;
 }
 .footer {
   padding: 0;
@@ -88,28 +96,29 @@
   font-size: 14px;
   border: none !important;
   text-decoration: none;
+  color: #999;
 }
 .footer ul li:nth-child(1) a:before {
   background: url('../image/indexnav1.png') no-repeat;
   background-size: 100% 100%;
 }
+.footer ul li:nth-child(1).active a {
+  color: #202020;
+}
 .footer ul li:nth-child(1).active a:before {
   background: url('../image/indexnav.png') no-repeat;
   background-size: 100% 100%;
 }
-.footer ul li:nth-child(1).active a:before a {
-  color: #2374bc;
+.footer ul li:nth-child(2) a {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
 }
 .footer ul li:nth-child(2) a:before {
-  background: url('wycnav1.png') no-repeat;
+  background: url('../image/fb.png') no-repeat;
   background-size: 100% 100%;
-}
-.footer ul li:nth-child(2).active a:before {
-  background: url('wycnav.png') no-repeat;
-  background-size: 100% 100%;
-}
-.footer ul li:nth-child(2).active a:before a {
-  color: #2374bc;
+  height: 100%;
+  width: 32%;
 }
 .footer ul li:nth-child(3) a:before {
   background: url('../image/mynav1.png') no-repeat;
@@ -119,21 +128,20 @@
   background: url('../image/mynav.png') no-repeat;
   background-size: 100% 100%;
 }
-.footer ul li:nth-child(3).active a:before a {
-  color: #2374bc;
-}
 .chuantou {
   position: fixed;
 }
 .index-all .header {
-  width: 100%;
+  width: 92%;
   height: 40px;
-  margin: 5px 0;
+  margin: 15px 4%;
+  border-radius: 8px;
   position: relative;
+  border: 1px solid #ccc;
 }
 .index-all .header select {
   display: inline-block;
-  width: 20%;
+  width: 22%;
   height: 40px;
   line-height: 40px;
   text-align: center;
@@ -146,11 +154,9 @@
 }
 .index-all .header input {
   display: inline-block;
-  width: 77%;
+  width: 75%;
   height: 35px;
-  border-radius: 10px;
-  border: 1px solid #ccc;
-  padding-left: 10px;
+  border: none;
 }
 .index-all .header a {
   display: inline-block;
@@ -158,9 +164,9 @@
   height: 40px;
   position: absolute;
   right: 10px;
-  background: url("../image/wycnav1.png") no-repeat;
+  background: url("../image/ss.png") no-repeat;
   background-size: 60%;
-  background-position: 8px 10px;
+  background-position: 17px 7px;
   z-index: 5;
 }
 .index-all .article-1 .index-tab {
@@ -200,13 +206,15 @@
   margin-top: 5px;
 }
 .index-all .article-1 .index-tab .list > ul > li {
-  width: 96%;
-  margin: 0 auto 10px auto;
-  border-bottom: 1px solid #ccc;
+  width: 100%;
+  background: #f2f2f2;
+  padding-bottom: 10px;
 }
 .index-all .article-1 .index-tab .list > ul > li a {
   display: block;
   color: #000;
+  background: #fff;
+  padding: 15px 15px 7px 15px;
 }
 .index-all .article-1 .index-tab .list > ul > li a .top {
   position: relative;
@@ -219,21 +227,24 @@
 .index-all .article-1 .index-tab .list > ul > li a .top .biaotitu {
   display: block;
   width: 100%;
-  height: 30px;
-  line-height: 30px;
+  height: 26px;
+  line-height: 26px;
   color: #fff;
   padding-right: 10px;
   text-align: right;
   background: rgba(0, 0, 0, 0.5);
   position: absolute;
   bottom: 0;
+  font-size: 14px;
 }
 .index-all .article-1 .index-tab .list > ul > li a .title {
-  width: 96%;
-  height: 40px;
-  line-height: 40px;
+  width: 100%;
+  height: 38px;
+  line-height: 41px;
   margin: 0 auto;
   font-size: 16px;
+  color: #202020;
+  text-align: left;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
@@ -242,15 +253,18 @@
 .index-all .article-1 .index-tab .list > ul > li a .time .end {
   display: inline-block;
   width: 49%;
-  line-height: 30px;
-  text-align: center;
+  text-align: left;
   font-size: 14px;
+  color: #bbb;
+  line-height: 20px;
 }
 .index-all .article-1 .index-tab .list > ul > li a .desc {
-  width: 96%;
-  line-height: 30px;
+  width: 100%;
   font-size: 14px;
   margin: 0 auto;
+  color: #999999;
+  text-align: left;
+  line-height: 26px;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
@@ -455,7 +469,7 @@
   width: 100%;
   height: 26vh;
   padding-top: 5vh;
-  background: url("../image/bgh.jpg") no-repeat;
+  background: url("../image/bgh.png") no-repeat;
   background-size: 100%;
 }
 .my-all .header-2 .middle img {
@@ -470,7 +484,7 @@
   line-height: 50px;
   text-align: center;
   font-size: 16px;
-  color: #fff;
+  color: #202020;
 }
 .my-all .article {
   background: #f2f2f2;
@@ -546,15 +560,16 @@
   display: inline-block;
   width: 20px;
   height: 20px;
-  border: 1px solid #ccc;
-  border-radius: 50%;
+  background: url("../image/wx.png") no-repeat;
+  background-size: cover;
   position: absolute;
   top: 25px;
   right: 30px;
 }
 .yonghu-all .yonghu-list ul li .xinxi .xz-inp {
-  background: url("../image/xz.jpg") no-repeat;
+  background: url("../image/xz.png") no-repeat;
   background-size: cover;
+  background-position: 0 0px;
 }
 .yonghu-all .footer-yonghu {
   width: 100%;
@@ -610,13 +625,15 @@
   margin-top: 5px;
 }
 .list-all .article-1 .index-tab .list > ul > li {
-  width: 96%;
-  margin: 0 auto 10px auto;
-  border-bottom: 1px solid #ccc;
+  width: 100%;
+  background: #f2f2f2;
+  padding-bottom: 10px;
 }
 .list-all .article-1 .index-tab .list > ul > li a {
   display: block;
   color: #000;
+  background: #fff;
+  padding: 15px 15px 7px 15px;
 }
 .list-all .article-1 .index-tab .list > ul > li a .top {
   position: relative;
@@ -629,21 +646,24 @@
 .list-all .article-1 .index-tab .list > ul > li a .top .biaotitu {
   display: block;
   width: 100%;
-  height: 30px;
-  line-height: 30px;
+  height: 26px;
+  line-height: 26px;
   color: #fff;
   padding-right: 10px;
   text-align: right;
   background: rgba(0, 0, 0, 0.5);
   position: absolute;
   bottom: 0;
+  font-size: 14px;
 }
 .list-all .article-1 .index-tab .list > ul > li a .title {
-  width: 96%;
-  height: 40px;
-  line-height: 40px;
+  width: 100%;
+  height: 38px;
+  line-height: 41px;
   margin: 0 auto;
   font-size: 16px;
+  color: #202020;
+  text-align: left;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
@@ -652,15 +672,18 @@
 .list-all .article-1 .index-tab .list > ul > li a .time .end {
   display: inline-block;
   width: 49%;
-  line-height: 30px;
-  text-align: center;
+  text-align: left;
   font-size: 14px;
+  color: #bbb;
+  line-height: 20px;
 }
 .list-all .article-1 .index-tab .list > ul > li a .desc {
-  width: 96%;
-  line-height: 30px;
+  width: 100%;
   font-size: 14px;
   margin: 0 auto;
+  color: #999999;
+  text-align: left;
+  line-height: 26px;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
@@ -680,18 +703,20 @@
 }
 .add-all .article .add-top .add-biaoti #biaoti {
   width: 100%;
-  height: 40px;
-  line-height: 40px;
+  height: 46px;
+  line-height: 46px;
   border: none;
-  padding-left: 30px;
+  padding-left: 15px;
+  font-size: 14px;
+  color: #999;
 }
 .add-all .article .add-top .add-miaoshu {
   border-bottom: 1px solid #ccc;
 }
 .add-all .article .add-top .add-miaoshu > p {
   width: 100%;
-  height: 30px;
-  line-height: 30px;
+  height: 46px;
+  line-height: 46px;
 }
 .add-all .article .add-top .add-miaoshu > p:before {
   content: "";
@@ -704,6 +729,41 @@
   border: none;
   padding: 10px;
   resize: none;
+  font-size: 14px;
+  color: #999;
+  line-height: 26px;
+}
+.add-all .article .add-top .add-miaoshu #tp {
+  padding: 0 15px;
+}
+.add-all .article .add-top .add-miaoshu #tp li {
+  display: inline-block;
+  width: 24%;
+  height: 80px;
+  position: relative;
+  margin-right: 1%;
+}
+.add-all .article .add-top .add-miaoshu #tp li a {
+  display: inline-block;
+  width: 100%;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  color: #fff;
+  font-size: 14px;
+  background: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  bottom: 0;
+}
+.add-all .article .add-top .add-miaoshu #tp li img {
+  width: 100%;
+  height: 100%;
+}
+.add-all .article .add-top .add-miaoshu #tp li:nth-child(4n) {
+  margin-right: 0;
+}
+.add-all .article .add-top .add-miaoshu #tp li:nth-child(n+5) {
+  margin-bottom: 0;
 }
 .add-all .article .add-top .add-miaoshu .add-tupianmiaoshu {
   width: 100%;
@@ -715,77 +775,34 @@
   width: 70%;
   padding-left: 10px;
 }
+.add-all .article .add-top .add-miaoshu .add-tupianmiaoshu .add-left .btn1 {
+  background: #3d8cf8;
+  border: none;
+  color: #fff;
+  height: 30px;
+  line-height: 30px;
+  padding: 0 10px;
+  border-radius: 8px;
+}
 .add-all .article .add-top .add-miaoshu .add-tupianmiaoshu .add-right {
   display: inline-block;
   width: 28%;
   text-align: right;
   padding-right: 10px;
-}
-.add-all .article .add-middle #toggle-button {
-  display: none;
-}
-.add-all .article .add-middle .button-label {
-  position: relative;
-  display: inline-block;
-  width: 60px;
-  height: 30px;
-  background-color: #ccc;
-  box-shadow: #ccc 0px 0px 0px 2px;
-  border-radius: 30px;
-  overflow: hidden;
-  top: 5px;
-}
-.add-all .article .add-middle .circle {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background-color: #fff;
-}
-.add-all .article .add-middle .button-label .text {
-  line-height: 30px;
-  font-size: 18px;
-  text-shadow: 0 0 2px #ddd;
-}
-.add-all .article .add-middle .on {
-  color: #fff;
-  display: none;
-  text-indent: 10px;
-}
-.add-all .article .add-middle .off {
-  color: #fff;
-  display: inline-block;
-  text-indent: 34px;
-}
-.add-all .article .add-middle .button-label .circle {
-  left: 0;
-  transition: all 0.3s;
-}
-.add-all .article .add-middle #toggle-button:checked + label.button-label .circle {
-  left: 30px;
-}
-.add-all .article .add-middle #toggle-button:checked + label.button-label .on {
-  display: inline-block;
-}
-.add-all .article .add-middle #toggle-button:checked + label.button-label .off {
-  display: none;
-}
-.add-all .article .add-middle #toggle-button:checked + label.button-label {
-  background-color: #0BB908;
+  color: #bbb;
 }
 .add-all .article .add-middle > p {
   width: 100%;
-  height: 40px;
-  line-height: 40px;
+  height: 46px;
+  line-height: 46px;
   border-bottom: 1px solid #ccc;
 }
 .add-all .article .add-middle > p .add-middle-left,
 .add-all .article .add-middle > p .add-middle-left1 {
   display: inline-block;
   height: 100%;
-  width: 75%;
+  width: 80%;
+  float: left;
 }
 .add-all .article .add-middle > p .add-middle-left:before,
 .add-all .article .add-middle > p .add-middle-left1:before {
@@ -797,7 +814,50 @@
 .add-all .article .add-middle > p .add-middle-right {
   display: inline-block;
   height: 100%;
+  width: 18%;
   text-align: center;
+  float: left;
+  position: relative;
+}
+.add-all .article .add-middle > p .add-middle-right .isDuoXuan,
+.add-all .article .add-middle > p .add-middle-right .isImgVote {
+  display: inline-block;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  margin-top: -10px;
+  height: 20px;
+  width: 40px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #EEEEEE;
+}
+.add-all .article .add-middle > p .add-middle-right .isDuoXuan:after,
+.add-all .article .add-middle > p .add-middle-right .isImgVote:after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 1px;
+  text-align: center;
+  line-height: 18px;
+  color: #000;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background-color: #fff;
+}
+.add-all .article .add-middle > p .add-middle-right .isDuoXuan.on,
+.add-all .article .add-middle > p .add-middle-right .isImgVote.on {
+  right: 1px;
+  left: auto;
+  border-color: transparent;
+  background-color: #44DB54;
+}
+.add-all .article .add-middle > p .add-middle-right .isDuoXuan.on:after,
+.add-all .article .add-middle > p .add-middle-right .isImgVote.on:after {
+  left: auto;
+  right: 1px;
 }
 .add-all .article .add-middle > p .add-middle-left1 {
   width: 65%;
@@ -833,12 +893,49 @@
 .add-all .article .add-middle #xuanxiang li input {
   display: inline-block;
   width: 85%;
-  height: 40px;
-  line-height: 40px;
+  height: 46px;
+  line-height: 46px;
   border: none;
   padding-left: 20px;
+  font-size: 14px;
 }
 .add-all .article .add-middle #xuanxiang li .close {
+  display: inline-block;
+  width: 10%;
+  height: 46px;
+  line-height: 46px;
+  text-align: center;
+  position: absolute;
+  right: 15px;
+  background: url("../image/sc.png") no-repeat;
+  background-position: 0 10px;
+}
+.add-all .article .add-middle #xuanxiangt {
+  height: auto;
+}
+.add-all .article .add-middle #xuanxiangt .z_addImg1 {
+  height: 40px;
+  padding-left: 15px;
+  border-bottom: 1px solid #ccc;
+}
+.add-all .article .add-middle #xuanxiangt .z_addImg1 img {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  margin-top: 5px;
+  margin-right: 5px;
+  float: left;
+}
+.add-all .article .add-middle #xuanxiangt .z_addImg1 input {
+  display: inline-block;
+  width: 70%;
+  height: 30px;
+  line-height: 30px;
+  float: left;
+  margin-top: 5px;
+  border: none;
+}
+.add-all .article .add-middle #xuanxiangt .z_addImg1 .close1 {
   display: inline-block;
   width: 10%;
   height: 40px;
@@ -847,12 +944,19 @@
   position: absolute;
   right: 15px;
 }
-.add-all .article .add-middle .add-list {
-  width: 100%;
-  height: 40px;
-  line-height: 40px;
-  border: none;
+.add-all .article .add-middle .add-list,
+.add-all .article .add-middle .add-list1 {
+  display: block;
   border-bottom: 1px solid #ccc;
+}
+.add-all .article .add-middle .add-list .btn1,
+.add-all .article .add-middle .add-list1 .btn1,
+.add-all .article .add-middle .add-list .btn,
+.add-all .article .add-middle .add-list1 .btn {
+  width: 100%;
+  height: 46px;
+  line-height: 46px;
+  border: none;
   background: #fff;
   color: #3d8cf8;
 }
@@ -861,8 +965,8 @@
 }
 .add-all .article .add-bottom .gaoji {
   width: 100%;
-  height: 40px;
-  line-height: 40px;
+  height: 46px;
+  line-height: 46px;
   border-bottom: 1px solid #ccc;
   position: relative;
 }
@@ -872,20 +976,20 @@
   margin-right: 10px;
   border-radius: 0 5px 5px 0;
 }
-.add-all .article .add-bottom .gaoji-1 {
-  background: url("../image/xiala.png") no-repeat;
-  background-size: 30px 30px;
-  background-position: 95% 5px;
+.add-all .article .add-bottom .gaoji > span {
+  display: inline-block;
+  height: 100%;
+  width: 82%;
 }
-.add-all .article .add-bottom .gaoji-2 {
-  background: url("../image/shangla.png") no-repeat;
-  background-size: 30px 30px;
-  background-position: 95% 5px;
+.add-all .article .add-bottom .gaoji > img {
+  display: inline-block;
+  position: relative;
+  top: 5px;
 }
 .add-all .article .add-bottom .gaoji-xuanx li {
   width: 100%;
-  height: 40px;
-  line-height: 40px;
+  height: 46px;
+  line-height: 46px;
   border-bottom: 1px solid #ccc;
 }
 .add-all .article .add-bottom .gaoji-xuanx li p {
@@ -899,8 +1003,62 @@
   height: 100%;
   width: 30%;
   text-align: right;
-  padding-right: 13px;
 }
 .add-all .article .add-bottom .gaoji-xuanx li span input {
   width: 100%;
+  height: 80%;
+}
+.add-all .article .add-bottom .gaoji-xuanx li #toggle-button2 {
+  display: none;
+}
+.add-all .article .add-bottom .gaoji-xuanx li .button-label2 {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 25px;
+  background-color: #ccc;
+  box-shadow: #ccc 0px 0px 0px 2px;
+  border-radius: 25px;
+  overflow: hidden;
+  top: 7px;
+}
+.add-all .article .add-bottom .gaoji-xuanx li .circle2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background-color: #fff;
+}
+.add-all .article .add-bottom .gaoji-xuanx li .button-label2 .text2 {
+  line-height: 25px;
+  font-size: 18px;
+  text-shadow: 0 0 2px #ddd;
+}
+.add-all .article .add-bottom .gaoji-xuanx li .on2 {
+  color: #fff;
+  display: none;
+  text-indent: 10px;
+}
+.add-all .article .add-bottom .gaoji-xuanx li .off2 {
+  color: #fff;
+  display: inline-block;
+  text-indent: 34px;
+}
+.add-all .article .add-bottom .gaoji-xuanx li .button-label2 .circle2 {
+  left: 0;
+  transition: all 0.3s;
+}
+.add-all .article .add-bottom .gaoji-xuanx li #toggle-button2:checked + label.button-label2 .circle2 {
+  left: 25px;
+}
+.add-all .article .add-bottom .gaoji-xuanx li #toggle-button2:checked + label.button-label2 .on2 {
+  display: inline-block;
+}
+.add-all .article .add-bottom .gaoji-xuanx li #toggle-button2:checked + label.button-label2 .off2 {
+  display: none;
+}
+.add-all .article .add-bottom .gaoji-xuanx li #toggle-button2:checked + label.button-label2 {
+  background-color: #0BB908;
 }

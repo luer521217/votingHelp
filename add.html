@@ -9,15 +9,17 @@
     <link rel="stylesheet" href="./css/base.css">
     <link rel="stylesheet" href="./css/index.css">   
     <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
-    <script src="js/index.js"></script>
 </head>
 <body class="add-all">
+    <!-- 头部 -->
     <header class="header-1">
-        <a href="javascript:history.go(-1)" class="goback"><</a>
+        <a href="" class="goback"></a>
         <h4>发布投票</h4>
         <a class="sub"><button type="submit" class="submit">发布</button></a>
     </header>
+    <!-- 主体 -->
     <article class="article">
+        <!-- 标题+详情描述+详情描述中的图片+字数显示 -->
         <div class="add-top">
             <div class="add-biaoti">
                 <input type="text" id="biaoti" placeholder="请输入投票标题" value=""/>
@@ -25,9 +27,11 @@
             <div class="add-miaoshu">
                 <p>详情描述</p>
                 <textarea name="" id="miaoshu" rows="10" cols="50" placeholder="填写投票描述，让更多的人参与投票" maxlength="2500" value=''></textarea>
+                <ul id="tp"></ul>
                 <div class="add-tupianmiaoshu">
                     <span class="add-left">
-                        <input type="file" name="tupian1" id="tupian1" value="最多可上传9张图片">
+                        <input type="file" name="tupian1" id="tupian1" style="display:none;" multiple/>
+                        <input name="button" type="button" class="btn1" id="upload" onclick="tupian1.click();" value="上传图片" />
                     </span>
                     <span class="add-right">
                         <span class="txt-num">0</span>
@@ -37,16 +41,18 @@
                 </div>
             </div>
         </div>
+        <!-- 支持多选+图片投票+投票文字类型的选项+图片类型的选项+新建 -->
         <div class="add-middle">
             <p class="middle-duoxuan">
                 <span class="add-middle-left">支持多选</span>
                 <span class="add-middle-right">
-                    <input type="checkbox" id="toggle-button" name="switch" class="duoxuan">
+                    <span class="isDuoXuan"></span>
+                    <!-- <input type="checkbox" id="toggle-button" name="switch" class="duoxuan">
                     <label for="toggle-button" class="button-label">
-                            <span class="circle"></span>
-                            <span class="text on"></span>
-                            <span class="text off"></span>
-                    </label>  
+                        <span class="circle"></span>
+                        <span class="text on"></span>
+                        <span class="text off"></span>
+                    </label>   -->
                 </span>
             </p>
             <p class="zuiduo" style="display:none">
@@ -60,34 +66,57 @@
             <p class="middle-tupian">
                 <span class="add-middle-left">图片投票</span>
                 <span class="add-middle-right">
-                    <input type="checkbox" id="tupian">
+                    <span class="isImgVote"></span>
+                    <!-- <input type="checkbox" id="toggle-button1" name="switch" class="tupian">
+                    <label for="toggle-button1" class="button-label1">
+                        <span class="circle1"></span>
+                        <span class="text1 on1"></span>
+                        <span class="text1 off1"></span>
+                    </label>   -->
                 </span>
             </p>
-            <ul id="xuanxiang">
-                <li>
-                    <input type="text" id="txt1" placeholder="请输入选项内容">
-                    <span class="close">x</span>
-                </li>
-                <li>
-                    <input type="text" id="txt2" placeholder="请输入选项内容">
-                    <span class="close">x</span>
-                </li>
-            </ul>
-            <input class="add-list" type="button" value="+新建投票选项" accept="image/gif,image/jpeg,image/jpg,image/png,image/svg" multiple/>
+            <!-- 投票选项 -->
+            <div class="wzxx1">
+                <ul id="xuanxiang">
+                    <li>
+                        <input type="text" id="txt1-1" placeholder="请输入选项内容">
+                        <span class="close"></span>
+                    </li>
+                    <li>
+                        <input type="text" id="txt2-1" placeholder="请输入选项内容">
+                        <span class="close"></span>
+                    </li>
+                </ul>
+                <span class="add-list">
+                    <input name="button" type="button" class="btn" value="+新建投票选项">
+                </span>
+            </div>
+            <div class="tpxx1" style="display:none">
+                <ul id="xuanxiangt"></ul>
+                <span class="add-list1">
+                    <input class="add-list2" type="file" name="tupian2" style="display:none;" accept="image/gif,image/jpeg,image/jpg,image/png,image/svg" multiple id="tupian2"/>
+                    <input name="button" type="button" class="btn1" id="upload" onclick="tupian2.click();" value="+新建投票选项">
+                </span>
+            </div>
+            
         </div>
+        <!-- 高级选项 -->
         <div class="add-bottom">
-            <p class="gaoji gaoji-1">高级选项</p>
-            <ul class="gaoji-xuanx" style="display:none">
+            <p class="gaoji">
+                <span>高级选项</span>
+                <img src="../image/xl.png" alt="">
+            </p>
+            <ul class="gaoji-xuanx">
                 <li class="begin">
                     <p>开始日期</p>
                     <span>
-                        <input type="date" class="begin" id="begin" value="">
+                        <input type="datetime-local" class="begin" id="begin" value="">
                     </span>
                 </li>
                 <li class="end">
                     <p>截止日期</p>
                     <span>
-                        <input type="date" class="end" id="end" value="">
+                        <input type="datetime-local" class="end" id="end" value="">
                     </span>
                 </li>
                 <!-- <li>
@@ -95,12 +124,21 @@
                 </li> -->
                 <li class="jiming">
                     <p>记名投票</p>
-                    <span>
+                    <!-- <span>
                         <input type="checkbox" class="jiming">
+                    </span> -->
+                    <span class="add-middle-right">
+                        <input type="checkbox" id="toggle-button2" name="switch" class="jiming">
+                        <label for="toggle-button2" class="button-label2">
+                            <span class="circle2"></span>
+                            <span class="text2 on2"></span>
+                            <span class="text2 off2"></span>
+                        </label>  
                     </span>
                 </li>
             </ul>
         </div>
     </article>
+    <script src="js/add.js"></script>
 </body>
 </html>

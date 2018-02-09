@@ -6,19 +6,121 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <script src='http://momentjs.cn/downloads/moment.js'></script>
 </head>
 
 <body>
     <script>
-        fetch('http://127.0.0.1:3000/api/getUserByAttr', {
+        var nowTime=moment();
+    </script>
+    <script>
+        //获取用户信息
+        //test(yes)
+        // fetch('http://127.0.0.1:3000/api/getUserByAttr', {
+        //         method: 'POST',
+        //         headers: new Headers({
+        //             'Accept': 'application/json',
+        //             'Content-Type': 'application/json'
+        //         }),
+        //         body: JSON.stringify({
+        //             attr: '_id',
+        //             val: '5a7a9279a7ea0a37287237cd'
+        //         })
+
+        //     })
+        //     .then((res) => {
+        //         return res.text()
+        //     })
+        //     .then((res) => {
+        //         console.log(res)
+        //     })
+
+        //添加投票信息
+        //   fetch('http://127.0.0.1:3000/api/addVote', {
+        //         method: 'POST',
+        //         headers: new Headers({
+        //             'Accept': 'application/json',
+        //             'Content-Type': 'application/json'
+        //         }),
+        //         body: JSON.stringify({
+        //             vtitle:'6666',
+        //             name:'yanglu',
+        //             phone:'17612908650',
+        //             vDesc:'hhhh',
+        //             v_type:0,
+        //             //select_max:2,
+        //             img_type:0,
+        //             sel_txt:['11','22','33','44','55'],
+        //             start_time:nowTime.format('YYYY-MM-DD HH:mm:ss'),
+        //             end_time:nowTime.add(3,'d').format('YYYY-MM-DD HH:mm:ss'),
+        //             status:0
+                    
+        //         })
+
+        //     })
+        //     .then((res) => {
+        //         return res.text()
+        //     })
+        //     .then((res) => {
+        //         console.log(res)
+        //     })
+
+
+        //删除id投票
+        // fetch('http://127.0.0.1:3000/api/delVote', {
+        //         method: 'POST',
+        //         headers: new Headers({
+        //             'Accept': 'application/json',
+        //             'Content-Type': 'application/json'
+        //         }),
+        //         body: JSON.stringify({
+        //             attr:"_id",
+        //             val:"5a7d045002309844d45d985f"
+        //         })
+
+        //     })
+        //     .then((res) => {
+        //         return res.text()
+        //     })
+        //     .then((res) => {
+        //         console.log(res)
+        //     })
+
+
+        //更新投票信息
+        // fetch('http://127.0.0.1:3000/api/updateVote', {
+        //         method: 'POST',
+        //         headers: new Headers({
+        //             'Accept': 'application/json',
+        //             'Content-Type': 'application/json'
+        //         }),
+        //         body: JSON.stringify({
+        //             _id: '5a7d041202309844d45d985d',
+        //             update: {
+        //                 vDesc: '改投票时间4545456',                    
+        //                 end_time: nowTime.add(10,'d').format('YYYY-MM-DD HH:mm:ss'),
+        //             }
+        //         })
+
+        //     })
+        //     .then((res) => {
+        //         return res.text()
+        //     })
+        //     .then((res) => {
+        //         console.log(res)
+        //     })
+
+
+        //获取投票信息
+        fetch('http://127.0.0.1:3000/api/getVoteList', {
                 method: 'POST',
                 headers: new Headers({
-                    'Content-Type': 'application/x-www-form-urlencoded' // 指定提交方式为表单提交111
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
                 }),
-                body: new URLSearchParams([
-                    ["foo", 1],
-                    ["bar", 2]
-                ]).toString()
+                body: JSON.stringify({
+                })
+
             })
             .then((res) => {
                 return res.text()
