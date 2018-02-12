@@ -46,45 +46,50 @@
             <p class="middle-duoxuan">
                 <span class="add-middle-left">支持多选</span>
                 <span class="add-middle-right">
-                    <span class="isDuoXuan"></span>
-                    <!-- <input type="checkbox" id="toggle-button" name="switch" class="duoxuan">
-                    <label for="toggle-button" class="button-label">
-                        <span class="circle"></span>
-                        <span class="text on"></span>
-                        <span class="text off"></span>
-                    </label>   -->
+                    <span class="choose duoxuan">
+                        <span id="canRead">
+                            <span></span>
+                        </span>
+                    </span>
                 </span>
             </p>
             <p class="zuiduo" style="display:none">
                 <span class="add-middle-left1">最多投几项</span>
                 <span class="add-middle-right1">
-                    <input type="button" id="jian" value='-'>
+                    <!-- <input type="button" id="jian" value='-'>
                     <input type="num" id="shuru" placeholder="不限" value=""> 
-                    <input type="button" id="jia" value='+'>
+                    <input type="button" id="jia" value='+'> -->
+                    <select>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                    </select>
+
                 </span>
             </p>
             <p class="middle-tupian">
                 <span class="add-middle-left">图片投票</span>
                 <span class="add-middle-right">
-                    <span class="isImgVote"></span>
-                    <!-- <input type="checkbox" id="toggle-button1" name="switch" class="tupian">
-                    <label for="toggle-button1" class="button-label1">
-                        <span class="circle1"></span>
-                        <span class="text1 on1"></span>
-                        <span class="text1 off1"></span>
-                    </label>   -->
+                    <span class="choose tupian">
+                        <span id="canRead1">
+                            <span></span>
+                        </span>
+                    </span>
                 </span>
             </p>
             <!-- 投票选项 -->
             <div class="wzxx1">
                 <ul id="xuanxiang">
                     <li>
-                        <input type="text" id="txt1-1" placeholder="请输入选项内容">
-                        <span class="close"></span>
+                        <input type="text" placeholder="请输入选项内容">
+                        <!-- <span class="close"></span> -->
                     </li>
                     <li>
-                        <input type="text" id="txt2-1" placeholder="请输入选项内容">
-                        <span class="close"></span>
+                        <input type="text" placeholder="请输入选项内容">
+                        <!-- <span class="close"></span> -->
                     </li>
                 </ul>
                 <span class="add-list">
@@ -106,37 +111,33 @@
                 <span>高级选项</span>
                 <img src="../image/xl.png" alt="">
             </p>
-            <ul class="gaoji-xuanx">
-                <li class="begin">
-                    <p>开始日期</p>
+            <div class="gaoji-xuanx"  style="display:none">
+                <p class="begin">
+                    <span>开始日期</span>
                     <span>
-                        <input type="datetime-local" class="begin" id="begin" value="">
+                        <input type="date" class="begin" id="begin" value="">
                     </span>
-                </li>
-                <li class="end">
-                    <p>截止日期</p>
+                </p>
+                <p class="end">
+                    <span>截止日期</span>
                     <span>
-                        <input type="datetime-local" class="end" id="end" value="">
+                        <input type="date" class="end" id="end" value="">
                     </span>
-                </li>
+                </p>
                 <!-- <li>
                     <p>可见范围</p>
                 </li> -->
-                <li class="jiming">
-                    <p>记名投票</p>
-                    <!-- <span>
-                        <input type="checkbox" class="jiming">
-                    </span> -->
-                    <span class="add-middle-right">
-                        <input type="checkbox" id="toggle-button2" name="switch" class="jiming">
-                        <label for="toggle-button2" class="button-label2">
-                            <span class="circle2"></span>
-                            <span class="text2 on2"></span>
-                            <span class="text2 off2"></span>
-                        </label>  
+                <p class="jiming">
+                    <span>记名投票</span>
+                    <span class="jiming1">
+                        <span class="choose jiming">
+                            <span id="canRead2">
+                                <span></span>
+                            </span>
+                        </span>
                     </span>
-                </li>
-            </ul>
+                </p>
+            </div>
         </div>
     </article>
     <script src="js/add.js"></script>

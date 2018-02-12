@@ -45,10 +45,10 @@ $(function(){
                 $(this).click(function () {
                     $(this).toggleClass("xz").siblings("li").removeClass("xz");
                     if ($(this).hasClass("xz")) {
-                        $(this).find(".fuceng").find("img").attr("src", "../image/yxz.png"); //选中
-                        $(this).siblings("li").find(".fuceng").find("img").attr("src", "../image/wxz.png"); //未选中
+                        $(this).find(".fuceng").find("img").attr("src", "../image/xz.png"); //选中
+                        $(this).siblings("li").find(".fuceng").find("img").attr("src", "../image/wx.png"); //未选中
                     } else {
-                        $(this).find(".fuceng").find("img").attr("src", "../image/wxz.png"); //未选中
+                        $(this).find(".fuceng").find("img").attr("src", "../image/wx.png"); //未选中
                     }
                 });
             });

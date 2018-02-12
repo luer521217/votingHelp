@@ -7,7 +7,7 @@ $(function(){
         if ($(this).hasClass("qx")) {
             $(".yonghu-list").find(".inp").map(function () {
                 $(this).addClass("xz-inp");
-                $(".list-qx").text("全不选");
+                $(".list-qx").text("取消全选");
             });
         } else {
             $(".yonghu-list").find(".inp").map(function () {
@@ -32,7 +32,7 @@ function qbxz() {
     // console.log("Li"+Li);
     // console.log("xzLi:"+xzLi);
     if (Li == xzLi) {
-        $(".list-qx").text("全不选"); //全部选中
+        $(".list-qx").text("取消全选"); //全部选中
         if (!$(".list-qx").hasClass("qx")) {
             $(".list-qx").addClass("qx");
         }
