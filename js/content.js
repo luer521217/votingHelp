@@ -1,15 +1,24 @@
 $(function(){
+
+    var id = window
+            .location
+            .search
+            .split('=')[1];
+    console.log(id);
     fetch('http://127.0.0.1:3003/api/findVoteByAttr', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({attr: "_id", val: '5a80ffa3517acf3720c6a567'})
+            body: JSON.stringify({attr: "_id", val: id})
         }).then((res) => {
-            return res.json()
+            return res.json();
         }).then((res) => {
             console.log(res);
+            $(".title").html(res.vtitle);
+            $(".desc").html(res.vDesc);
+            $(".begin").html(res.start_time);
         })
     // **************************************************************************************************************投票详情页面底部的投票选项功能content.html
     // 顶部点击更多显示弹出框以及遮罩层
@@ -24,13 +33,48 @@ $(function(){
     $("#bianji").click(function () {
         // 编辑时需要进行数据回填，将现有的详情页面的数据回填到发起页面或新页面中
         if (confirm("您确认要修改该投票活动吗？")) { //会刷新页面
-            $("#bianji").find("a").attr("href", "add.html"); //如果确认编辑，则让页面跳转至列表页
+            $("#bianji").find("a").attr("href", 'add.html?id='+ id ); //如果确认编辑，则让页面跳转至列表页
+            var _id = window
+            .location
+            .search
+            .split('=')[1];
+            fetch('http://127.0.0.1:3003/api/findVoteByAttr', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({attr: "_id", val: _id})
+            }).then((res) => {
+                return res.json()
+            }).then((res) => {
+                console.log(res)
+            })
         }
     })
 
     // 删除
     $("#shanchu").click(function () {
         if (confirm("您确认要删除该投票活动吗？")) { //会刷新页面
+            //删除id投票
+            fetch('http://127.0.0.1:3003/api/delVote', {
+                method: 'POST',
+                headers: new Headers({
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }),
+                body: JSON.stringify({
+                    attr:"_id",
+                    val:id
+                })
+
+            })
+            .then((res) => {
+                return res.text()
+            })
+            .then((res) => {
+                console.log(res)
+            })
             $("#shanchu").find("a").attr("href", "list.html"); //如果确认删除，则让页面跳转至列表页
         }
     })
