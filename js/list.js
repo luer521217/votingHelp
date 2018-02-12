@@ -53,14 +53,14 @@ fetch(hostUrl + '/api/getVoteList', {
                 var ll3 = $(".old-list").children("li").length;
                 $(".old-num").html('('+ ll3 +')');
             }
-            else{
-                dom1,dom2,dom3 = '<h3>暂无对应投票！</h3>';
-            }
+            //else{
+                //dom1,dom2,dom3 = '<h3>暂无对应投票！</h3>';
+            //}
                 
         })
     }
     else{
-        dom4 = '<h3>暂无对应投票！</h3>'
+        //dom4 = '<h3>暂无对应投票！</h3>'
     }
     // $(".all-list").html('').append(dom);
 })

@@ -472,6 +472,8 @@
   width: 20px;
   height: 20px;
   border: 1px solid #ccc;
+  position: absolute;
+  top: 7px;
 }
 .content-all .artical .main .main-middle .wenzi-xuanxiang li .active {
   background: url("../image/yxz.png") no-repeat;
@@ -1028,7 +1030,7 @@
   -moz-transform: rotate(90deg);
   /* Firefox */
   -webkit-transform: rotate(90deg);
-  /* Safari ? Chrome */
+  /* Safari 和 Chrome */
   -o-transform: rotate(90deg);
 }
 .add-all .article .add-bottom .gaoji-xuanx > p {
@@ -1040,14 +1042,14 @@
 .add-all .article .add-bottom .gaoji-xuanx > p > span:nth-child(1) {
   display: inline-block;
   height: 100%;
-  width: 65%;
+  width: 45%;
   padding-left: 15px;
   float: left;
 }
 .add-all .article .add-bottom .gaoji-xuanx > p > span:nth-child(2) {
   display: inline-block;
   height: 90%;
-  width: 28%;
+  width: 50%;
   float: right;
   margin-right: 15px;
 }
@@ -1118,7 +1120,7 @@
     left: 21px;
   }
 }
-/*??*/
+/*弹窗*/
 .cover {
   display: none;
 }

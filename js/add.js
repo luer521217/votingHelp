@@ -1,5 +1,53 @@
 
 $(function(){
+    //数据回填
+    var _id = window
+            .location
+            .search
+            .split('=')[1];
+    fetch(hostUrl +'/api/findVoteByAttr', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({attr: "_id", val: _id})
+    }).then((res) => {
+        return res.json()
+    }).then((res) => {
+        console.log(res);
+        //标题
+        $("#biaoti").val(res.vtitle);
+        //描述
+        $("#miaoshu").val(res.vDesc);
+        //支持多选
+        if(res.v_type == 1){
+            $('#canRead').addClass('selected');
+            $('#shuru').val(res.select_max);
+        }else{
+            $('#canRead').removeClass('selected');
+        }
+        //图片投票
+        if(res.img_type == 1){
+            $('#canRead1').addClass('selected');
+        }else{
+            $('#canRead1').removeClass('selected');
+        }
+        //选项
+        $("#xuanxiang").children("li").each(function (i) {
+            $(this).find('input').val(res.sel_txt[i]);
+        })
+        //开始时间
+        $('#begin').val(res.start_time.split(' ')[0] + 'T'+ res.start_time.split(' ')[1]);
+        //截止时间
+        $('#end').val(res.end_time.split(' ')[0] + 'T'+ res.end_time.split(' ')[1]);
+        //记名投票
+        if(res.status == 1){
+            $('#canRead2').addClass('selected');
+        }else{
+            $('#canRead2').removeClass('selected');
+        }
+    })
 
     var startTime;
     var endTime;
@@ -9,6 +57,9 @@ $(function(){
         console.log("fdadfsdf"+biaoti);
         //描述
         var miaoshu = $("#miaoshu").val();
+
+        // 描述图片
+        
         // 支持多选
         var canRead;
         if($("#canRead").hasClass("selected")){
@@ -45,7 +96,7 @@ $(function(){
             canRead2 = 0;
         }
 
-        fetch('http://127.0.0.1:3003/api/addVote', {
+        fetch(hostUrl +'/api/addVote', {
                 method: 'POST',
                 headers: new Headers({
                     'Accept': 'application/json',
@@ -344,10 +395,10 @@ $("#xuanxiang").find("li").last().on("blur","input",function(){
 // 发布成功时页面的跳转以及返回时清空添加页面中的输入内容
 function fbcg() {
     alert("发布成功");
-    // $(".sub").attr("href", "content.html");
-    // $(".article").find("input,textarea").map(function () {
-    //     $(this).val("");
-    // });
+    $(".sub").attr("href", "list.html");
+    $(".article").find("input,textarea").map(function () {
+        $(this).val("");
+    });
 }
 //弹出自定义提示窗口
 var showAlert= function(msg, url){

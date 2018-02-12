@@ -5,7 +5,7 @@ $(function(){
             .search
             .split('=')[1];
     console.log(id);
-    fetch('http://127.0.0.1:3003/api/findVoteByAttr', {
+    fetch(hostUrl +'/api/findVoteByAttr', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -16,9 +16,47 @@ $(function(){
             return res.json();
         }).then((res) => {
             console.log(res);
-            $(".title").html(res.vtitle);
-            $(".desc").html(res.vDesc);
-            $(".begin").html(res.start_time);
+            $(".title").html(res.vtitle);//标题
+            $(".desc").html(res.vDesc);//描述
+            $(".begin").html(res.start_time);//开始时间
+            $(".end").html(res.end_time);//结束时间
+            $(".nicheng").html(res.name);//昵称
+            //实名、匿名投票
+            if(res.status){
+                alert("asfgasfgasdg");
+                $(".niming-left").children("span").eq(0).html("实名投票");
+            }else{
+                $(".niming-left").children("span").eq(0).html("匿名投票");
+            }
+            // 单、多选
+            if(res.v_type){
+                $(".duo").show();
+                $(".dan").hide();
+            }else{
+                $(".duo").hide();
+                $(".dan").show();
+            }
+            // 选项类型
+            if(res.img_type){
+                $(".tup-xuanxiang").show();
+                $(".wenzi-xuanxiang").hide();
+            }else{
+                $(".tup-xuanxiang").hide();
+                $(".wenzi-xuanxiang").show();
+            }
+            // 文字选项
+            if(res.sel_txt.length){
+                for(var i=0;i < res.sel_txt.length; i++){
+                    // if(res.sel_txt.length == $(".xx").length){
+                    //     $(".xx").eq(i).html(res.sel_txt[i]);
+                    // }else if(res.sel_txt.length > $(".xx").length){
+                    //     $(".xx").eq(i).html(res.sel_txt[i]);
+                        $(".wenzi-xuanxiang").append('<li><span  class="xx">'+ res.sel_txt[i]+'</span><span class="check"></span><p class="xuanxiang-desc"><progress class="processbar" max="100" value="44"></progress><label>44</label></p></li>');
+                    // }else if(res.sel_txt.length < $(".xx").length){
+                    //     $(".xx").eq(i).html(res.sel_txt[i]);
+                    // }
+                }
+            }
         })
     // **************************************************************************************************************投票详情页面底部的投票选项功能content.html
     // 顶部点击更多显示弹出框以及遮罩层
@@ -34,22 +72,6 @@ $(function(){
         // 编辑时需要进行数据回填，将现有的详情页面的数据回填到发起页面或新页面中
         if (confirm("您确认要修改该投票活动吗？")) { //会刷新页面
             $("#bianji").find("a").attr("href", 'add.html?id='+ id ); //如果确认编辑，则让页面跳转至列表页
-            var _id = window
-            .location
-            .search
-            .split('=')[1];
-            fetch('http://127.0.0.1:3003/api/findVoteByAttr', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({attr: "_id", val: _id})
-            }).then((res) => {
-                return res.json()
-            }).then((res) => {
-                console.log(res)
-            })
         }
     })
 
@@ -57,7 +79,7 @@ $(function(){
     $("#shanchu").click(function () {
         if (confirm("您确认要删除该投票活动吗？")) { //会刷新页面
             //删除id投票
-            fetch('http://127.0.0.1:3003/api/delVote', {
+            fetch(hostUrl +'/api/delVote', {
                 method: 'POST',
                 headers: new Headers({
                     'Accept': 'application/json',
@@ -101,10 +123,10 @@ $(function(){
                 $(this).click(function () {
                     $(this).toggleClass("xz").siblings("li").removeClass("xz");
                     if ($(this).hasClass("xz")) {
-                        $(this).find(".fuceng").find("img").attr("src", "../image/xz.png"); //选中
-                        $(this).siblings("li").find(".fuceng").find("img").attr("src", "../image/wx.png"); //未选中
+                        $(this).find(".fuceng").find("img").attr("src", "image/xz.png"); //选中
+                        $(this).siblings("li").find(".fuceng").find("img").attr("src", "image/wx.png"); //未选中
                     } else {
-                        $(this).find(".fuceng").find("img").attr("src", "../image/wx.png"); //未选中
+                        $(this).find(".fuceng").find("img").attr("src", "image/wx.png"); //未选中
                     }
                 });
             });
@@ -126,9 +148,9 @@ $(function(){
                 $(this).click(function () {
                     $(this).toggleClass("xz");
                     if ($(this).hasClass("xz")) {
-                        $(this).find(".fuceng").find("img").attr("src", "../image/yxz.png"); //选中
+                        $(this).find(".fuceng").find("img").attr("src", "image/yxz.png"); //选中
                     } else {
-                        $(this).find(".fuceng").find("img").attr("src", "../image/wxz.png"); //未选中
+                        $(this).find(".fuceng").find("img").attr("src", "image/wxz.png"); //未选中
                     }
                 });
             });
