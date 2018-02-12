@@ -125,6 +125,18 @@ voteSchema.statics = {
 			}
 		});
 	},
+	findVoteByAttr: function (attr, val, callback) {
+		this.findOne({
+			[attr]: val
+		}).exec((err, user) => {
+			if (err) {
+				console.log(err);
+				callback('fail');
+			} else {
+				callback(user);				
+			}
+		});
+	},
 	delVote: function (attr,val, callback) {
 		this.remove({
 			[attr]:val

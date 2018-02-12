@@ -1,4 +1,16 @@
 $(function(){
+    fetch('http://127.0.0.1:3003/api/findVoteByAttr', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({attr: "_id", val: '5a80ffa3517acf3720c6a567'})
+        }).then((res) => {
+            return res.json()
+        }).then((res) => {
+            console.log(res);
+        })
     // **************************************************************************************************************投票详情页面底部的投票选项功能content.html
     // 顶部点击更多显示弹出框以及遮罩层
     $(".special").click(function () {

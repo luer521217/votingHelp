@@ -1,63 +1,87 @@
-var hostUrl = 'http://127.0.0.1:3001';
-$('.goback').on('click',function(){
-    window.location.href = '/index.html';
-});
-
-
-
 
 $(function(){
 
-    var biaoti = $("#biaoti").val();
-    var miaoshu = $("#miaoshu").val();
-    var canRead = $("#canRead").hasClass("selected");
-    console.log(canRead);
-    //var shuru = $("#shuru").val();
-    var canRead1 = $("#canRead1").hasClass("selected");
+    var startTime;
+    var endTime;
+    $(".submit").click(function(){
+        //标题
+        var biaoti = $("#biaoti").val();
+        console.log("fdadfsdf"+biaoti);
+        //描述
+        var miaoshu = $("#miaoshu").val();
+        // 支持多选
+        var canRead;
+        if($("#canRead").hasClass("selected")){
+            canRead = 1;//选中
+        }else{
+            canRead = 0;//未选中
+        }
+        console.log("qqqqqqqqqqqqq:"+canRead);
+        // 最多可选
+        var shuru = $("#shuru").val();
+        // 图片投票
+        var canRead1;
+        if($("#canRead1").hasClass("selected")){
+            canRead1 = 1;
+        }else{
+            canRead1 = 0;
+        }
+        // 文字类型的投票选项
+        var xuanxiang = [];
+        $("#xuanxiang").find("li").map(function(){
+            xuanxiang.push($(this).find("input").val());
+        });
+        console.log("aa:" + xuanxiang);
+        // 开始时间
+        startTime = moment($("#begin").val()).format('YYYY-MM-DD HH:mm:ss');
+
+        // 结束时间
+        endTime = moment($("#end").val()).format('YYYY-MM-DD HH:mm:ss');
+        // 记名投票
+        var canRead2;
+        if($("#canRead2").hasClass("selected")){
+            canRead2 = 1;
+        }else{
+            canRead2 = 0;
+        }
+
+        fetch('http://127.0.0.1:3003/api/addVote', {
+                method: 'POST',
+                headers: new Headers({
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }),
+                body: JSON.stringify({
+                    vtitle:biaoti,
+                    name:'yanglu',
+                    phone:'17612908650',
+                    vDesc:miaoshu,
+                    v_type:canRead,
+                    select_max:shuru,
+                    img_type:canRead1,
+                    sel_txt:xuanxiang,
+                    start_time:startTime,
+                    end_time:endTime,
+                    status:canRead2
+                    
+                })
+
+            })
+            .then((res) => {
+                return res.text()
+            })
+            .then((res) => {
+                console.log(res)
+            })
+    });
+    
+    // start_time:nowTime.format('YYYY-MM-DD HH:mm:ss'),
+    // end_time:nowTime.add(3,'d').format('YYYY-MM-DD HH:mm:ss'),
 
     //添加投票信息
-        //   fetch('http://127.0.0.1:3000/api/addVote', {
-        //         method: 'POST',
-        //         headers: new Headers({
-        //             'Accept': 'application/json',
-        //             'Content-Type': 'application/json'
-        //         }),
-        //         body: JSON.stringify({
-        //             vtitle:'6666',
-        //             name:'yanglu',
-        //             phone:'17612908650',
-        //             vDesc:'hhhh',
-        //             v_type:0,
-        //             //select_max:2,
-        //             img_type:0,
-        //             sel_txt:['11','22','33','44','55'],
-        //             start_time:nowTime.format('YYYY-MM-DD HH:mm:ss'),
-        //             end_time:nowTime.add(3,'d').format('YYYY-MM-DD HH:mm:ss'),
-        //             status:0
-                    
-        //         })
+          
 
-        //     })
-        //     .then((res) => {
-        //         return res.text()
-        //     })
-        //     .then((res) => {
-        //         console.log(res)
-        //     })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/****************************************************前台事件************************************ */
 
 // 投票标题的字数限制
 $(".add-top").on("blur", "#biaoti", function () {
@@ -205,7 +229,6 @@ $(".jiming1").click(function () {
 // 点击发布按钮进行投票发布判断所有的必填项
 
 var sysDate = new Date();
-console.log("bbbbbbbbbbb:"+sysDate);
 
 //开始时间
 var begin;
@@ -320,11 +343,11 @@ $("#xuanxiang").find("li").last().on("blur","input",function(){
 })
 // 发布成功时页面的跳转以及返回时清空添加页面中的输入内容
 function fbcg() {
-alert("发布成功");
-$(".sub").attr("href", "content.html");
-$(".article").find("input,textarea").map(function () {
-    $(this).val("");
-});
+    alert("发布成功");
+    // $(".sub").attr("href", "content.html");
+    // $(".article").find("input,textarea").map(function () {
+    //     $(this).val("");
+    // });
 }
 //弹出自定义提示窗口
 var showAlert= function(msg, url){

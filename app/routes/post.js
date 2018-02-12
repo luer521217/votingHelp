@@ -19,7 +19,7 @@ let Vote = require('../database/models/vote');
 // })
 //多选文字投票
 // Vote.create({
-// 	"vtitle": '总结会11',
+// 	"vtitle": '总结会3333',
 // 	"name":'yanglu',
 //     "phone":'17612908650',
 // 	"vDesc": '总结一下按时打发ff阿萨德阿萨德',
@@ -27,21 +27,16 @@ let Vote = require('../database/models/vote');
 //  	"v_type": 1,
 //  	"select_max": 2,
 //  	"img_type": 0,
-//  	"sel_txt":["111", "222","333"],
-// 	"start_time": '2018-02-10 12:00:00',
-// 	"end_time": '2018-02-12 12:00:00',
+//  	"sel_txt":["777", "888","999"],
+// 	"start_time": '2018-03-10 12:00:00',
+// 	"end_time": '2018-03-12 12:00:00',
 // 	"status": 0,
 // });
 
 
 // 获取账户信息
 router.post('/getUserByAttr', function (req, res) {
-	if (!req.body.attr || !req.body.val) {
-		res.send(200, {
-			mes: '参数错误。'
-		});
-		return false;
-	}
+	console.log(req.body);
 	User.findUserByAttr(req.body.attr, req.body.val, (user) => {
 		res.send(200, user);
 	})
@@ -73,6 +68,13 @@ router.post('/addVote', function (req, res) {
 		res.send(200, status);
 	})
 
+});
+//查询投票
+router.post('/findVoteByAttr',function(req,res){
+	console.log(req.body);
+	Vote.findVoteByAttr(req.body.attr,req.body.val,(status) =>{
+		res.send(200,status);
+	})
 });
 
 //删除投票
