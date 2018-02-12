@@ -4,72 +4,61 @@ $('.goback').on('click',function(){
 });
 
 
-// 支持多选开关点击之后显示最多可投几项栏目
-(function () {
-    var i = 1;
-    $('.isDuoXuan').on('click', function () {
-        if (i == 1) {
-            $(this).addClass('on');
-            $('.zuiduo').show();
-            i = -i;
-        } else {
-            $(this).removeClass('on');
-            $('.zuiduo').hide();
-            i = -i;
-        }
-    });
-})();
-// $(".duoxuan").click(function () {
-//     if ($(".duoxuan").is(':checked')) {
-//         $(".zuiduo").show();
-//     } else {
-//         $(".zuiduo").hide();
-//     }
-// });
-
-//图片投票或文字投票事件
-(function () {
-    var i = 1;
-    $('.isImgVote').on('click', function () {
-        if (i == 1) {
-            $(this).addClass('on');
-            $(".wzxx1").hide();
-            $(".tpxx1").show();          
-            i = -i;
-        } else {
-            $(this).removeClass('on');
-            $(".wzxx1").show();
-            $(".tpxx1").hide();
-            i = -i;
-        }
-    });
-})();
-
-$(".submit").on('click',function () {
-    submit(id);
-})
-
-function submit(id) {
-    var biaoti = $("#biaoti").val();
-    var miaoshu = $("#miaoshu").val();
-    var isDuoXuan = $(".isDuoXuan").hasClass("on");
-    var shuru = $("#shuru").val();
-    var isImgVote = $(".isImgVote").hasClass("on");
-}
-
-
-
-
-
-
-
-
-
-
-
 
 
 $(function(){
+
+    var biaoti = $("#biaoti").val();
+    var miaoshu = $("#miaoshu").val();
+    var canRead = $("#canRead").hasClass("selected");
+    console.log(canRead);
+    //var shuru = $("#shuru").val();
+    var canRead1 = $("#canRead1").hasClass("selected");
+
+    //添加投票信息
+        //   fetch('http://127.0.0.1:3000/api/addVote', {
+        //         method: 'POST',
+        //         headers: new Headers({
+        //             'Accept': 'application/json',
+        //             'Content-Type': 'application/json'
+        //         }),
+        //         body: JSON.stringify({
+        //             vtitle:'6666',
+        //             name:'yanglu',
+        //             phone:'17612908650',
+        //             vDesc:'hhhh',
+        //             v_type:0,
+        //             //select_max:2,
+        //             img_type:0,
+        //             sel_txt:['11','22','33','44','55'],
+        //             start_time:nowTime.format('YYYY-MM-DD HH:mm:ss'),
+        //             end_time:nowTime.add(3,'d').format('YYYY-MM-DD HH:mm:ss'),
+        //             status:0
+                    
+        //         })
+
+        //     })
+        //     .then((res) => {
+        //         return res.text()
+        //     })
+        //     .then((res) => {
+        //         console.log(res)
+        //     })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // 投票标题的字数限制
 $(".add-top").on("blur", "#biaoti", function () {
     if ($(this).val().length > 15) {
