@@ -1,120 +1,113 @@
 
 $(function(){
-    //数据回填
     var _id = window
             .location
             .search
             .split('=')[1];
-    fetch(hostUrl +'/api/findVoteByAttr', {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({attr: "_id", val: _id})
-    }).then((res) => {
-        return res.json()
-    }).then((res) => {
-        console.log(res);
-        //标题
-        $("#biaoti").val(res.vtitle);
-        //描述
-        $("#miaoshu").val(res.vDesc);
-        //支持多选
-        if(res.v_type == 1){
-            $('#canRead').addClass('selected');
-            $('#shuru').val(res.select_max);
-        }else{
-            $('#canRead').removeClass('selected');
-        }
-        //图片投票
-        if(res.img_type == 1){
-            $('#canRead1').addClass('selected');
-        }else{
-            $('#canRead1').removeClass('selected');
-        }
-        //选项
-        $("#xuanxiang").children("li").each(function (i) {
-            $(this).find('input').val(res.sel_txt[i]);
+    //更新
+    if(_id){
+        //数据回填
+        fetch(hostUrl +'/api/findVoteByAttr', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({attr: "_id", val: _id})
+        }).then((res) => {
+            return res.json()
+        }).then((res) => {
+            console.log(res);
+            //标题
+            $("#biaoti").val(res.vtitle);
+            //描述
+            $("#miaoshu").val(res.vDesc);
+            //支持多选
+            if(res.v_type == 1){
+                $('#canRead').addClass('selected');
+                $('#shuru').val(res.select_max);
+            }else{
+                $('#canRead').removeClass('selected');
+            }
+            //图片投票
+            if(res.img_type == 1){
+                $('#canRead1').addClass('selected');
+            }else{
+                $('#canRead1').removeClass('selected');
+            }
+            //选项
+            console.log(res.sel_txt.length);
+
+            $(".add-list").hide();
+            $(".middle-duoxuan").find(".add-middle-left").html("选项");
+            $(".middle-duoxuan").find(".add-middle-right").hide();
+
+            $(".txt-num").text($("#miaoshu").val().length);
+
+
+            if($("#xuanxiang").children("li").length == res.sel_txt.length){
+                $("#xuanxiang").children("li").each(function (i) {
+                    $(this).find('input').val(res.sel_txt[i]);
+                });
+            }else if($("#xuanxiang").children("li").length < res.sel_txt.length){
+                for(var i = 0;i < res.sel_txt.length; i ++ ){
+                    if(i<2){
+                        $("#xuanxiang").children("li").eq(i).val(res.sel_txt[i]);
+                    }else{
+                        var dom ='';
+                        dom += '<li><input type="text" placeholder="请输入选项内容"> </li>';
+                        $("#xuanxiang").append(dom);
+                        $("#xuanxiang").children("li").each(function (i) {
+                            $(this).find('input').val(res.sel_txt[i]);
+                        });
+
+                    }
+                }
+                
+
+            }
+            $("#xuanxiang").children("li").each(function (i) {
+                $(this).find('input').val(res.sel_txt[i]);
+            })
+            //开始时间
+            //res.start_time.split(' ')[0] + 'T'+ res.start_time.split(' ')[1]
+            console.log(res.start_time);
+            $('#begin').val(res.start_time);
+            //截止时间
+            $('#end').val(res.end_time);
+            //记名投票
+            if(res.status == 1){
+                $('#canRead2').addClass('selected');
+            }else{
+                $('#canRead2').removeClass('selected');
+            }
         })
-        //开始时间
-        $('#begin').val(res.start_time.split(' ')[0] + 'T'+ res.start_time.split(' ')[1]);
-        //截止时间
-        $('#end').val(res.end_time.split(' ')[0] + 'T'+ res.end_time.split(' ')[1]);
-        //记名投票
-        if(res.status == 1){
-            $('#canRead2').addClass('selected');
-        }else{
-            $('#canRead2').removeClass('selected');
-        }
-    })
-
-    var startTime;
-    var endTime;
-    $(".submit").click(function(){
-        //标题
-        var biaoti = $("#biaoti").val();
-        console.log("fdadfsdf"+biaoti);
-        //描述
-        var miaoshu = $("#miaoshu").val();
-
-        // 描述图片
         
-        // 支持多选
-        var canRead;
-        if($("#canRead").hasClass("selected")){
-            canRead = 1;//选中
-        }else{
-            canRead = 0;//未选中
-        }
-        console.log("qqqqqqqqqqqqq:"+canRead);
-        // 最多可选
-        var shuru = $("#shuru").val();
-        // 图片投票
-        var canRead1;
-        if($("#canRead1").hasClass("selected")){
-            canRead1 = 1;
-        }else{
-            canRead1 = 0;
-        }
-        // 文字类型的投票选项
-        var xuanxiang = [];
-        $("#xuanxiang").find("li").map(function(){
-            xuanxiang.push($(this).find("input").val());
-        });
-        console.log("aa:" + xuanxiang);
-        // 开始时间
-        startTime = moment($("#begin").val()).format('YYYY-MM-DD HH:mm:ss');
-
-        // 结束时间
-        endTime = moment($("#end").val()).format('YYYY-MM-DD HH:mm:ss');
-        // 记名投票
-        var canRead2;
-        if($("#canRead2").hasClass("selected")){
-            canRead2 = 1;
-        }else{
-            canRead2 = 0;
-        }
-
-        fetch(hostUrl +'/api/addVote', {
+        $(".submit").click(function(){
+            // 描述
+            var miaoshu = $("#miaoshu").val();
+            // 记名投票
+            var canRead2;
+            if($("#canRead2").hasClass("selected")){
+                canRead2 = 1;
+            }else{
+                canRead2 = 0;
+            }
+            var endTime = moment($("#end").val()).format('YYYY-MM-DD HH:mm:ss');
+            //更新投票信息(目前考虑只能修改描述、记名投票、结束时间)
+            fetch(hostUrl + '/api/updateVote', {
                 method: 'POST',
                 headers: new Headers({
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 }),
                 body: JSON.stringify({
-                    vtitle:biaoti,
-                    name:'yanglu',
-                    phone:'17612908650',
-                    vDesc:miaoshu,
-                    v_type:canRead,
-                    select_max:shuru,
-                    img_type:canRead1,
-                    sel_txt:xuanxiang,
-                    start_time:startTime,
-                    end_time:endTime,
-                    status:canRead2
-                    
+                    _id: _id,
+                    update: {
+                        vDesc: miaoshu,
+                        status:canRead2,           
+                        end_time: endTime
+                    }
                 })
 
             })
@@ -124,7 +117,96 @@ $(function(){
             .then((res) => {
                 console.log(res)
             })
-    });
+        });
+    }
+    //发起
+    else{
+        var startTime;
+        var endTime;
+        $(".submit").click(function(){
+            //标题
+            var biaoti = $("#biaoti").val();
+            console.log("fdadfsdf"+biaoti);
+            //描述
+            var miaoshu = $("#miaoshu").val();
+
+            // 描述图片
+            
+            // 支持多选
+            var canRead;
+            if($("#canRead").hasClass("selected")){
+                canRead = 1;//选中
+            }else{
+                canRead = 0;//未选中
+            }
+            console.log("qqqqqqqqqqqqq:"+canRead);
+            // 最多可选
+            var shuru = $("#shuru").val();
+            // 图片投票
+            var canRead1;
+            if($("#canRead1").hasClass("selected")){
+                canRead1 = 1;
+            }else{
+                canRead1 = 0;
+            }
+            // 文字类型的投票选项
+            var xuanxiang = [];
+            $("#xuanxiang").find("li").map(function(){
+                xuanxiang.push($(this).find("input").val());
+            });
+            console.log("aa:" + xuanxiang);
+            // 开始时间
+            startTime = moment($("#begin").val()).format('YYYY-MM-DD');
+
+            // 结束时间
+            endTime = moment($("#end").val()).format('YYYY-MM-DD');
+            // 记名投票
+            var canRead2;
+            if($("#canRead2").hasClass("selected")){
+                canRead2 = 1;
+            }else{
+                canRead2 = 0;
+            }
+
+            var sData = {
+                "vtitle":biaoti,
+                "name":'yanglu',
+                "phone":'17612908650',
+                "vDesc":miaoshu,
+                "v_type":canRead,
+                "select_max":shuru,
+                "img_type":canRead1,
+                "sel_txt":xuanxiang,
+                "start_time":startTime,
+                "end_time":endTime,
+                "status":canRead2,
+                "add_rs":0
+            }
+
+            fetch(hostUrl +'/api/addVote', {
+                    method: 'POST',
+                    headers: new Headers({
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    }),
+                    body: JSON.stringify(sData)
+
+                })
+                .then((res) => {
+                    return res.text()
+                })
+                .then((res) => {
+                    console.log(res)
+                    if (res.status == 'success') {
+                        alert('添加日程成功！');
+                        //window.location.href = '/index.html';
+                    }
+                })
+        });
+    }
+   
+
+    
     
     // start_time:nowTime.format('YYYY-MM-DD HH:mm:ss'),
     // end_time:nowTime.add(3,'d').format('YYYY-MM-DD HH:mm:ss'),

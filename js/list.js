@@ -13,23 +13,24 @@ fetch(hostUrl + '/api/getVoteList', {
     return res.json()
 })
 .then((res) => {
-    console.log(res.voteList.length);
     var dom1 ='';
     var dom2 ='';
     var dom3 ='';
     var dom4 ='';
     if(res.voteList.length){
         $(res.voteList).each(function(){
-            var nowTime = moment().format("YYYY-MM-DD HH:mm:ss");
+            var nowTime = moment().format("YYYY-MM-DD");
             var now=new Date(nowTime).getTime();
-            var s_t = new Date(this.start_time).getTime();
-            var e_t = new Date(this.end_time).getTime();
-            console.log(this._id);
+            var s_t = new Date(moment(this.start_time).format("YYYY-MM-DD")).getTime();
+            var e_t = new Date(moment(this.end_time).format("YYYY-MM-DD")).getTime();
+            console.log(now);
+            console.log(s_t);
+            console.log(e_t);
             
             // var y=now.format("YYYY-MM-DD HH:mm").split('-')[0];
 		    // var m=now.format("YYYY-MM-DD HH:mm").split('-')[1];
             // var d = now.format("YYYY-MM-DD HH:mm").split('-')[2].split(' ')[0];
-            dom4 += '<li><a href="content.html?id='+this._id+'"><p class="top"><img src="image/biaotitu.png" class="title-img"><span class="biaotitu">已投票：10</span></p><h5 class="title">' + this.vtitle + '</h5><p class="time"><span class="begin">开始时间：<span>'+ this.start_time.split(' ')[0]+'</span></span><span class="end">结束时间：' + this.end_time.split(' ')[0] +'</span></p><p class="desc">'+this.vDesc+'</p></a></li>';
+            dom4 += '<li><a href="content.html?id='+this._id+'"><p class="top"><img src="image/biaotitu.png" class="title-img"><span class="biaotitu">已投票：' + this.add_rs+'</span></p><h5 class="title">' + this.vtitle + '</h5><p class="time"><span class="begin">开始时间：<span>'+ this.start_time.split(' ')[0]+'</span></span><span class="end">结束时间：' + this.end_time.split(' ')[0] +'</span></p><p class="desc">'+this.vDesc+'</p></a></li>';
 
             $(".all-list").html('').append(dom4);
             $(".all-num").html('('+ res.voteList.length +')');

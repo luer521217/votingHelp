@@ -403,6 +403,9 @@
   line-height: 40px;
   text-align: center;
 }
+.content-all .artical .main .main-middle .niming p .duo {
+  display: none;
+}
 .content-all .artical .main .main-middle .tup-xuanxiang {
   width: 96%;
   margin: 0 auto;
@@ -474,6 +477,7 @@
   border: 1px solid #ccc;
   position: absolute;
   top: 7px;
+  right: 15px;
 }
 .content-all .artical .main .main-middle .wenzi-xuanxiang li .active {
   background: url("../image/yxz.png") no-repeat;
@@ -770,6 +774,13 @@
 .list-all .article-5 {
   margin-top: 5px;
 }
+.add-all .header-1 {
+  position: fixed;
+  top: 0;
+}
+.add-all .article {
+  margin-top: 46px;
+}
 .add-all .article .add-top .add-biaoti {
   width: 100%;
   border-bottom: 1px solid #ccc;
@@ -844,25 +855,16 @@
   line-height: 40px;
 }
 .add-all .article .add-top .add-miaoshu .add-tupianmiaoshu .add-left {
-  display: inline-block;
-  width: 70%;
-  padding-left: 10px;
-}
-.add-all .article .add-top .add-miaoshu .add-tupianmiaoshu .add-left .btn1 {
-  background: #3d8cf8;
-  border: none;
-  color: #fff;
-  height: 30px;
-  line-height: 30px;
-  padding: 0 10px;
-  border-radius: 8px;
+  display: none;
 }
 .add-all .article .add-top .add-miaoshu .add-tupianmiaoshu .add-right {
-  display: inline-block;
-  width: 28%;
+  display: block;
   text-align: right;
   padding-right: 10px;
   color: #bbb;
+}
+.add-all .article .add-middle .middle-tupian {
+  display: none;
 }
 .add-all .article .add-middle > p {
   width: 100%;

@@ -5,7 +5,8 @@ $(function(){
             .search
             .split('=')[1];
     console.log(id);
-    fetch(hostUrl +'/api/findVoteByAttr', {
+    if(id){
+        fetch(hostUrl +'/api/findVoteByAttr', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -16,6 +17,10 @@ $(function(){
             return res.json();
         }).then((res) => {
             console.log(res);
+            $(".OLI").hide();
+
+            $(".cy").children("span").eq(0).html(res.add_rs);
+            rsf(res.add_rs);
             $(".title").html(res.vtitle);//标题
             $(".desc").html(res.vDesc);//描述
             $(".begin").html(res.start_time);//开始时间
@@ -23,18 +28,19 @@ $(function(){
             $(".nicheng").html(res.name);//昵称
             //实名、匿名投票
             if(res.status){
-                alert("asfgasfgasdg");
                 $(".niming-left").children("span").eq(0).html("实名投票");
             }else{
                 $(".niming-left").children("span").eq(0).html("匿名投票");
             }
             // 单、多选
             if(res.v_type){
-                $(".duo").show();
+                $(".duo").show().addClass("a1");
                 $(".dan").hide();
+                duo(res.select_max);
             }else{
                 $(".duo").hide();
-                $(".dan").show();
+                $(".dan").show().addClass("a1");
+                dan();
             }
             // 选项类型
             if(res.img_type){
@@ -47,17 +53,12 @@ $(function(){
             // 文字选项
             if(res.sel_txt.length){
                 for(var i=0;i < res.sel_txt.length; i++){
-                    // if(res.sel_txt.length == $(".xx").length){
-                    //     $(".xx").eq(i).html(res.sel_txt[i]);
-                    // }else if(res.sel_txt.length > $(".xx").length){
-                    //     $(".xx").eq(i).html(res.sel_txt[i]);
-                        $(".wenzi-xuanxiang").append('<li><span  class="xx">'+ res.sel_txt[i]+'</span><span class="check"></span><p class="xuanxiang-desc"><progress class="processbar" max="100" value="44"></progress><label>44</label></p></li>');
-                    // }else if(res.sel_txt.length < $(".xx").length){
-                    //     $(".xx").eq(i).html(res.sel_txt[i]);
-                    // }
-                }
+                    $(".wenzi-xuanxiang").append('<li><span  class="xx">'+ res.sel_txt[i]+'</span><span class="check"></span><p class="xuanxiang-desc"><progress class="processbar" max="100" value="44"></progress><label>44</label></p></li>');
+            }
             }
         })
+    }
+
     // **************************************************************************************************************投票详情页面底部的投票选项功能content.html
     // 顶部点击更多显示弹出框以及遮罩层
     $(".special").click(function () {
@@ -115,63 +116,11 @@ $(function(){
         $("body").removeClass("chuantou");
     })
 
-    // 单选与多选通过类名进行区分，单选时类名为dan，多选时类名为duo
-    if ($(".niming").find(".dan").length) {
-        //图片类型的单选
-        if ($(".tup-xuanxiang").length) {
-            $(".tup-xuanxiang").find("li").map(function () {
-                $(this).click(function () {
-                    $(this).toggleClass("xz").siblings("li").removeClass("xz");
-                    if ($(this).hasClass("xz")) {
-                        $(this).find(".fuceng").find("img").attr("src", "image/xz.png"); //选中
-                        $(this).siblings("li").find(".fuceng").find("img").attr("src", "image/wx.png"); //未选中
-                    } else {
-                        $(this).find(".fuceng").find("img").attr("src", "image/wx.png"); //未选中
-                    }
-                });
-            });
-        }
-        // 文字类型的单选
-        if ($(".wenzi-xuanxiang").length) {
-            $(".wenzi-xuanxiang").find("li").map(function () {
-                $(this).click(function () {
-                    $(this).addClass("xz").siblings("li").removeClass("xz");
-                    $(this).find(".check").addClass("active");
-                    $(this).siblings("li").find(".check").removeClass("active");
-                });
-            });
-        }
-    } else if ($(".niming").find(".duo").length) {
-        //图片类型的多选
-        if ($(".tup-xuanxiang").length) {
-            $(".tup-xuanxiang").find("li").map(function () {
-                $(this).click(function () {
-                    $(this).toggleClass("xz");
-                    if ($(this).hasClass("xz")) {
-                        $(this).find(".fuceng").find("img").attr("src", "image/yxz.png"); //选中
-                    } else {
-                        $(this).find(".fuceng").find("img").attr("src", "image/wxz.png"); //未选中
-                    }
-                });
-            });
-        }
-
-        // 文字类型的多选
-        if ($(".wenzi-xuanxiang").length) {
-            $(".wenzi-xuanxiang").find("li").map(function () {
-                $(this).click(function () {
-                    $(this).addClass("xz");
-                    $(this).find(".check").addClass("active");
-                });
-            });
-        }
-    };
-
     // 点击我要投票按钮时，如果没有被选中的选项则出现提示，有没有被选中的选项是通过li上有没有类名为xz进行区分的
     $(".toupiao").click(function () {
-
         // 图片
-        if ($(".tup-xuanxiang").length) {
+        rsf();
+        if ($(".tup-xuanxiang").find("li").length) {
             if ($(".tup-xuanxiang").find(".xz").length) {
                 $(".xuanxiang-desc").show();
                 $(".fuceng").hide();
@@ -182,7 +131,7 @@ $(function(){
         }
 
         // 文字
-        if ($(".wenzi-xuanxiang").length) {
+        if ($(".wenzi-xuanxiang").find("li").length) {
             if ($(".wenzi-xuanxiang").find(".xz").length) {
                 $(".xuanxiang-desc").show();
                 $(".check").hide();
@@ -193,6 +142,30 @@ $(function(){
         }
     });
 });
+   // 单选与多选
+function dan() {
+    $("body").on("click",".check",function(){
+        $(this).parent("li").addClass("xz").siblings("li").removeClass("xz");
+        $(this).parent("li").find(".check").addClass("active");
+        $(this).parent("li").siblings("li").find(".check").removeClass("active");
+    });
+}
+function duo(data) {
+    $("body").on("click",".check",function(){
+        $(this).parent("li").toggleClass("xz");
+        $(this).parent("li").find(".check").toggleClass("active");
+        var len = $(".xz").length;
+        if(len > data){
+            alert("最多只能投"+data+"票");
+        }
+        
+    });
+}
+function rsf(data) {
+    data++;
+    $(".cy").find("span").eq(0).html(data);
+    console.log(data+"-------asdfasdfas");
+}
 //弹出自定义提示窗口
 var showAlert= function(msg, url){
     //弹框存在

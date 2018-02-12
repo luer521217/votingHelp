@@ -58,6 +58,10 @@ let voteSchema = new Schema({
         type:Number,
         default: 0
 	},
+	"add_rs":{
+		type:Number,
+        default: 0
+	},
 	"meta": {
 		createAt: {
 			type: Date,
@@ -71,16 +75,16 @@ let voteSchema = new Schema({
 });
 
 //每次创建都会调用这个方法
-// voteSchema.pre('save', function (next) {
-// 	//判断是否是新的数据对象，更新创建|更新数据的时间
-// 	if (this.isNew) {
-// 		this.meta.createAt = this.meta.updateAt = Date.now()
-// 	} else {
-// 		this.meta.updateAt = Date.now()
-// 	}
+voteSchema.pre('save', function (next) {
+	//判断是否是新的数据对象，更新创建|更新数据的时间
+	if (this.isNew) {
+		this.meta.createAt = this.meta.updateAt = Date.now()
+	} else {
+		this.meta.updateAt = Date.now()
+	}
 
-// 	next();
-// })
+	next();
+})
 
 voteSchema.statimethodscs = {};
 
@@ -97,6 +101,7 @@ voteSchema.statics = {
 		});
 	},
     addVote: function (vote, callback) {
+		console.log("--------------------------------" + vote.add_rs);
 		let newVote = {
 			"vtitle": vote.vtitle,
 			"name":vote.name || '',
@@ -110,7 +115,8 @@ voteSchema.statics = {
 			"sel_img":vote.sel_img || [''],
 			"start_time":vote.start_time || '',
 			"end_time":vote.end_time || '',
-			"status":vote.status
+			"status":vote.status,
+			"add_rs":vote.add_rs
 		}
 		this.create(newVote, (err) => {
 			if (err) {
