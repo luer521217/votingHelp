@@ -21,6 +21,11 @@ $(document).ready(function () {
             $(".search").attr("href", "list.html");
         }
     });
+    
+    $(".will-list").find("li").click(function(){
+        alert("投票活动暂未开始");
+        $(this).find("a").removeAttr("href");
+    });
 
 });
 

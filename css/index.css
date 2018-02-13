@@ -347,9 +347,12 @@
   background-position: 0 11px;
 }
 .content-all .artical .main .zhuangtai p .cy {
-  display: inline-block;
-  width: 46%;
-  text-align: right;
+  display: none;
+}
+.content-all .artical .main .main-top {
+  background: url('../image/bjt.jpg');
+  min-height: 300px;
+  background-size: cover;
 }
 .content-all .artical .main .main-top .title {
   width: 96%;
@@ -361,6 +364,9 @@
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
+}
+.content-all .artical .main .main-top .time {
+  display: none;
 }
 .content-all .artical .main .main-top .time .begin,
 .content-all .artical .main .main-top .time .end {

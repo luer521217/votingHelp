@@ -54,7 +54,15 @@ $(function(){
             if(res.sel_txt.length){
                 for(var i=0;i < res.sel_txt.length; i++){
                     $(".wenzi-xuanxiang").append('<li><span  class="xx">'+ res.sel_txt[i]+'</span><span class="check"></span><p class="xuanxiang-desc"><progress class="processbar" max="100" value="44"></progress><label>44</label></p></li>');
+                }
             }
+            var nowTime = moment().format("YYYY-MM-DD");
+            var now=new Date(nowTime).getTime();
+            var e_t = new Date(moment(res.end_time).format("YYYY-MM-DD")).getTime();
+            console.log(e_t);
+            console.log(now);
+            if(now > e_t){
+                panduan(true);
             }
         })
     }
@@ -122,9 +130,10 @@ $(function(){
         rsf();
         if ($(".tup-xuanxiang").find("li").length) {
             if ($(".tup-xuanxiang").find(".xz").length) {
-                $(".xuanxiang-desc").show();
+                // $(".xuanxiang-desc").show();
                 $(".fuceng").hide();
                 $(".toupiao").hide();
+                alert("投票成功");
             } else {
                 alert("请选择");
             }
@@ -133,15 +142,87 @@ $(function(){
         // 文字
         if ($(".wenzi-xuanxiang").find("li").length) {
             if ($(".wenzi-xuanxiang").find(".xz").length) {
-                $(".xuanxiang-desc").show();
+                // $(".xuanxiang-desc").show();
                 $(".check").hide();
                 $(".toupiao").hide();
+                alert("投票成功");
+
             } else {
                 alert("请选择");
             }
         }
+        // danxuan
+        //$(".wenzi-xuanxiang").find(".xz").find(".processbar").val(parseInt($(".wenzi-xuanxiang").find(".xz").find(".processbar").val()) ++);
+        //$(".wenzi-xuanxiang").find(".xz").find(".xuanxiang-desc").find("label").text($(".wenzi-xuanxiang").find(".xz").find(".processbar").val())
+        $(".wenzi-xuanxiang").find(".xz").each(function(){
+            $(this).find(".processbar").val(1);
+            $(this).find(".xuanxiang-desc").find("label").text($(this).find(".processbar").val());
+        })
     });
+
+    // 单选与多选通过类名进行区分，单选时类名为dan，多选时类名为duo
+    if ($(".niming").find(".dan").length) {
+        //图片类型的单选
+        if ($(".tup-xuanxiang").length) {
+            $(".tup-xuanxiang").find("li").map(function () {
+                $(this).click(function () {
+                    $(this).toggleClass("xz").siblings("li").removeClass("xz");
+                    if ($(this).hasClass("xz")) {
+                        $(this).find(".fuceng").find("img").attr("src", "../image/xz.png"); //选中
+                        $(this).siblings("li").find(".fuceng").find("img").attr("src", "../image/wx.png"); //未选中
+                    } else {
+                        $(this).find(".fuceng").find("img").attr("src", "../image/wx.png"); //未选中
+                    }
+                });
+            });
+        }
+        // 文字类型的单选
+        if ($(".wenzi-xuanxiang").length) {
+            $(".wenzi-xuanxiang").find("li").map(function () {
+                $(this).click(function () {
+                    $(this).addClass("xz").siblings("li").removeClass("xz");
+                    $(this).find(".check").addClass("active");
+                    $(this).siblings("li").find(".check").removeClass("active");
+                });
+            });
+        }
+    } else if ($(".niming").find(".duo").length) {
+        //图片类型的多选
+        if ($(".tup-xuanxiang").length) {
+            $(".tup-xuanxiang").find("li").map(function () {
+                $(this).click(function () {
+                    $(this).toggleClass("xz");
+                    if ($(this).hasClass("xz")) {
+                        $(this).find(".fuceng").find("img").attr("src", "../image/yxz.png"); //选中
+                    } else {
+                        $(this).find(".fuceng").find("img").attr("src", "../image/wxz.png"); //未选中
+                    }
+                });
+            });
+        }
+
+        // 文字类型的多选
+        if ($(".wenzi-xuanxiang").length) {
+            $(".wenzi-xuanxiang").find("li").map(function () {
+                $(this).click(function () {
+                    $(this).addClass("xz");
+                    $(this).find(".check").addClass("active");
+                });
+            });
+        }
+    };
+    
 });
+// panduan
+function panduan(data){
+    if(data){
+        $(".wenzi-xuanxiang").find("li").find(".xuanxiang-desc").show();
+        $(".wenzi-xuanxiang").find("li").find(".check").hide();
+        $(".hr").html("活动已结束");
+        $(".toupiao").hide();
+    }
+}
+
    // 单选与多选
 function dan() {
     $("body").on("click",".check",function(){

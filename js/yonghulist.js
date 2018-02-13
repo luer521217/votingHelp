@@ -22,6 +22,11 @@ $(function(){
         $(this).toggleClass("xz-inp");
         qbxz();
     });
+
+    //按钮
+    $(".queding").click(function(){
+        alert('已保存授权');
+    })
 })
 
 
