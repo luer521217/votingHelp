@@ -13,51 +13,34 @@ fetch(hostUrl + '/api/getVoteList', {
     return res.json()
 })
 .then((res) => {
-    var dom1 ='';
-    var dom2 ='';
-    var dom3 ='';
-    var dom4 ='';
-    var dom5 = '<h3 style="text-align:center;">暂无对应投票！</h3>';
-    $(".all-list").html('').append(dom5);
-    $(".all-num").html('('+ 0 +')');
-    $(".now-list").html('').append(dom5);
-    $(".now-num").html('('+ 0 +')');
-    $(".will-list").html('').append(dom5);
-    $(".will-num").html('('+ 0 +')');
-    $(".old-list").html('').append(dom5);
-    $(".old-num").html('('+ 0 +')');
+    var $dom = '<h3 style="text-align:center;margin-top:15px;">暂无对应投票！</h3>';
+    $(".list").find("ul").each(function() {
+        $(this).html('').append($dom);
+    });
+    $(".index-tab-ul").find("li").each(function() {
+        $(this).find("span").eq(1).text('('+ 0 +')');
+    });
     if(res.voteList.length){
-        $(".all-list").html('');
-        $(".now-list").html('');
-        $(".will-list").html('');
-        $(".old-list").html('');
+        $(".list").find("ul").each(function() {
+            $(this).html('');
+        });
+        console.log(res);
         $(res.voteList).each(function(i){
             var nowTime = moment().format("YYYY-MM-DD");
             var now=new Date(nowTime).getTime();
             var s_t = new Date(moment(this.start_time).format("YYYY-MM-DD")).getTime();
-            var e_t = new Date(moment(this.end_time).format("YYYY-MM-DD")).getTime();
-            
-            // var y=now.format("YYYY-MM-DD HH:mm").split('-')[0];
-		    // var m=now.format("YYYY-MM-DD HH:mm").split('-')[1];
-            // var d = now.format("YYYY-MM-DD HH:mm").split('-')[2].split(' ')[0];
-
-            // dom4 += '<li><a href="content.html?id='+this._id+'"><p class="top"><img src="image/biaotitu.png" class="title-img"><span class="biaotitu">已投票：' + this.add_rs+'</span></p><h5 class="title">' + this.vtitle + '</h5><p class="time"><span class="begin">开始时间：<span>'+ this.start_time.split(' ')[0]+'</span></span><span class="end">结束时间：' + this.end_time.split(' ')[0] +'</span></p><p class="desc">'+this.vDesc+'</p></a></li>';
-
-            // $(".all-list").html('').append(dom4);
-            // $(".all-num").html('('+ res.voteList.length +')');
-
-            
+            var e_t = new Date(moment(this.end_time).format("YYYY-MM-DD")).getTime();                     
             var dom;
+
             if(s_t < now && now < e_t){
-                console.log(res.voteList.length);
-                //console.log('进行中');
-                dom = '<li><a href="content.html?id='+this._id+'"><p class="top"><img src="image/biaotitu.png" class="title-img"><span class="biaotitu">已投票：' + this.add_rs+'</span></p><h5 class="title">' + this.vtitle + '</h5><p class="time"><span class="begin">开始时间：<span>'+ this.start_time.split(' ')[0]+'</span></span><span class="end">结束时间：' + this.end_time.split(' ')[0] +'</span></p><p class="desc">'+this.vDesc+'</p></a></li>';
+                console.log('进行中');
+                dom = '<li><a href="content.html?id='+this._id+'"><p class="top"><img src="image/xy.png" class="title-img"><span class="biaotitu">已投票：' + this.add_rs+'</span></p><h5 class="title">' + this.vtitle + '</h5><p class="time"><span class="begin">开始时间：<span>'+ this.start_time.split(' ')[0]+'</span></span><span class="end">结束时间：' + this.end_time.split(' ')[0] +'</span></p><p class="desc">'+this.vDesc+'</p></a></li>';
                 $(".now-list").append(dom);
                 var ll = $(".now-list").children("li").length;
                 $(".now-num").html('('+ ll +')');
             }else if(now < s_t){
-                //console.log('未开始');
-                dom = '<li><a href="javascript:void(0);"><p class="top"><img src="image/biaotitu.png" class="title-img"><span class="biaotitu">已投票：' + this.add_rs+'</span></p><h5 class="title">' + this.vtitle + '</h5><p class="time"><span class="begin">开始时间：<span>'+ this.start_time.split(' ')[0]+'</span></span><span class="end">结束时间：' + this.end_time.split(' ')[0] +'</span></p><p class="desc">'+this.vDesc+'</p></a></li>';
+                console.log('未开始');
+                dom = '<li><a href="javascript:void(0);"><p class="top"><img src="image/xy1.png" class="title-img"><span class="biaotitu">已投票：' + this.add_rs+'</span></p><h5 class="title">' + this.vtitle + '</h5><p class="time"><span class="begin">开始时间：<span>'+ this.start_time.split(' ')[0]+'</span></span><span class="end">结束时间：' + this.end_time.split(' ')[0] +'</span></p><p class="desc">'+this.vDesc+'</p></a></li>';
                 $(".will-list").append(dom);
                 var ll2 = $(".will-list").children("li").length;
                 $(".will-num").html('('+ ll2 +')');
@@ -66,39 +49,24 @@ fetch(hostUrl + '/api/getVoteList', {
                     $(this).find("a").removeAttr("href");
                 });
             }else if(now > e_t){
-                //console.log('已完成');
-                dom = '<li><a href="content.html?id='+this._id+'"><p class="top"><img src="image/biaotitu.png" class="title-img"><span class="biaotitu">已投票：' + this.add_rs+'</span></p><h5 class="title">' + this.vtitle + '</h5><p class="time"><span class="begin">开始时间：<span>'+ this.start_time.split(' ')[0]+'</span></span><span class="end">结束时间：' + this.end_time.split(' ')[0] +'</span></p><p class="desc">'+this.vDesc+'</p></a></li>';
+                console.log('已结束');
+                dom = '<li><a href="content.html?id='+this._id+'"><p class="top"><img src="image/xy2.png" class="title-img"><span class="biaotitu">已投票：' + this.add_rs+'</span></p><h5 class="title">' + this.vtitle + '</h5><p class="time"><span class="begin">开始时间：<span>'+ this.start_time.split(' ')[0]+'</span></span><span class="end">结束时间：' + this.end_time.split(' ')[0] +'</span></p><p class="desc">'+this.vDesc+'</p></a></li>';
                 $(".old-list").append(dom);
                 var ll3 = $(".old-list").children("li").length;
                 $(".old-num").html('('+ ll3 +')');
-                // panduan1(i);
             }  
             
             $(".all-list").append(dom);
             $(".all-num").html('('+ res.voteList.length +')');
-            // console.log("this.end_time.split(' ')[0]"+this.end_time.split(' ')[0]);
-            // var nowTime = moment().format("YYYY-MM-DD");
-            // var now=new Date(nowTime).getTime();
-            // var e_t = new Date(moment(this.end_time).format("YYYY-MM-DD")).getTime();
-            // console.log(e_t);
-            // console.log(now);
-            // console.log(i);
-            // if(now > e_t){
-                
-            // }
         })
     }   
 });
-$(function(){
-    $(".will-list").find("li").click(function(){
-        alert("投票活动暂未开始");
-        $(this).find("a").removeAttr("href");
-    });
+
+
+$(".will-list").find("li").click(function(){
+    alert("投票活动暂未开始");
+    $(this).find("a").removeAttr("href");
 });
-function panduan1(i){
-    $(".all-list").find("li").eq(i).find("a").attr("href","javascript:void(0);");
-    console.log("i-----------:"+i);    
-}
 //弹出自定义提示窗口
 var showAlert= function(msg, url){
     //弹框存在

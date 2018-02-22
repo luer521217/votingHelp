@@ -347,7 +347,9 @@
   background-position: 0 11px;
 }
 .content-all .artical .main .zhuangtai p .cy {
-  display: none;
+  display: inline-block;
+  width: 46%;
+  text-align: right;
 }
 .content-all .artical .main .main-top {
   background: url('../image/bjt.jpg');

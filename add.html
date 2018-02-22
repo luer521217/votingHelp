@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="browsermode" content="application"/>
     <title>投票管理</title>
@@ -12,7 +12,7 @@
 <body class="add-all">
     <!-- 头部 -->
     <header class="header-1">
-        <a href="javascript:history.go(-1)" class="goback"><</a>
+        <a href="index.html" class="goback"><</a>
         <h4>发布投票</h4>
         <a class="sub"><button type="submit" class="submit">发布</button></a>
     </header>
@@ -21,11 +21,11 @@
         <!-- 标题+详情描述+详情描述中的图片+字数显示 -->
         <div class="add-top">
             <div class="add-biaoti">
-                <input type="text" id="biaoti" placeholder="请输入投票标题" value=""/>
+                <input type="text" id="biaoti" placeholder="请输入投票标题"/>
             </div>
             <div class="add-miaoshu">
                 <p>详情描述</p>
-                <textarea name="" id="miaoshu" rows="10" cols="50" placeholder="填写投票描述，让更多的人参与投票" maxlength="2500" value=''></textarea>
+                <textarea name="" id="miaoshu" rows="10" cols="50" placeholder="填写投票描述，让更多的人参与投票" maxlength="2500" ></textarea>
                 <ul id="tp"></ul>
                 <div class="add-tupianmiaoshu">
                     <span class="add-left">
@@ -114,13 +114,13 @@
                 <p class="begin">
                     <span>开始时间</span>
                     <span>
-                        <input type="date" class="begin" id="begin" value="">
+                        <input type="date" class="begin" id="begin">
                     </span>
                 </p>
                 <p class="end">
                     <span>截止时间</span>
                     <span>
-                        <input type="date" class="end" id="end" value="">
+                        <input type="date" class="end" id="end" >
                     </span>
                 </p>
                 <!-- <li>

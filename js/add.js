@@ -1,9 +1,7 @@
 
 $(function(){
-    var _id = window
-            .location
-            .search
-            .split('=')[1];
+    var _id = window.location.search.split('=')[1];
+    
     //更新
     if(_id){
         //数据回填
@@ -123,7 +121,91 @@ $(function(){
     else{
         var startTime;
         var endTime;
+        // 判断文字选项的内容是否相同
+        var tf=false;
+        var xx_item = [];
+        $("#xuanxiang").find("li").last().on("blur","input",function(){
+            $("#xuanxiang").find("input").map(function (i) {
+                xx_item.push($(this).val());
+            });
+            console.log('$("#xuanxiang").find("input"):'+$("#xuanxiang").find("input").length);
+            console.log("xx_item:" + xx_item);
+            for (var i = 0; i < xx_item.length; i++) {
+                for (var j = i + 1; j < xx_item.length; j++) {
+                    if (xx_item[i] == xx_item[j]) {
+                        tf = true;
+                    }else{
+                        tf = false;
+                    }
+                }
+            }
+        });
         $(".submit").click(function(){
+
+                var txt = 0;
+        
+                // 判断文字选项中已填选项的个数
+                $("#xuanxiang").find("input").map(function (i) {
+                    xx_item.push($(this).val());
+                    if ($(this).val() != "") { //统计选项有值的数量，至少要有2个选项不能为空
+                        txt++;
+                    }
+                });
+        
+                if ($("#biaoti").val() == "") {
+                    tag = 0;
+                } else if ($("#miaoshu").val() == "") {
+                    tag = 1;
+                } else if (txt == 0) { //投票选项不能为空
+                    tag = 2;
+                } else if (txt == 1) { //至少两个投票选项已填
+                    tag = 3;
+                } else if (tf) {
+                    tag = 4;
+                } else if ($("#begin").val() == "") {
+                    tag = 5;
+                } else if(sysDate > begin){
+                    tag = 6;
+                } else if ($("#end").val() == "") {
+                    tag = 7;
+                } else if (begin > end) {
+                    tag = 8;
+                } else {
+                    tag = 9;
+                }
+                switch (tag) {
+                    case 0:
+                        alert("请输入投票标题");
+                        return false;
+                    case 1:
+                        alert("请输入投票描述");
+                        return false;
+                    case 2:
+                        alert("请输入投票选项");
+                        return false;
+                    case 3:
+                        alert("投票的选项不能少于2个");
+                        return false;
+                    case 4:
+                        alert("投票选项的内容不能相同");
+                        return false;
+                    case 5:
+                        alert("开始时间不能为空");
+                        return false;
+                    case 6:
+                        alert("开始时间不能小于当前时间");
+                        return false;
+                    case 7:
+                        alert("结束时间不能为空");
+                        return false;
+                    case 8:
+                        alert("开始时间不能大于结束时间");
+                        return false;
+                    case 9:
+                        fbcg();
+                }
+
+
             //标题
             var biaoti = $("#biaoti").val();
             console.log("fdadfsdf"+biaoti);
@@ -183,6 +265,8 @@ $(function(){
                 "add_rs":0
             }
 
+            console.log(sData);
+
             fetch(hostUrl +'/api/addVote', {
                     method: 'POST',
                     headers: new Headers({
@@ -196,7 +280,7 @@ $(function(){
                     return res.text()
                 })
                 .then((res) => {
-                    console.log(res)
+                    console.log(res);
                     if (res.status == 'success') {
                         alert('添加日程成功！');
                         //window.location.href = '/index.html';
@@ -204,14 +288,6 @@ $(function(){
                 })
         });
     }
-   
-
-    
-    
-    // start_time:nowTime.format('YYYY-MM-DD HH:mm:ss'),
-    // end_time:nowTime.add(3,'d').format('YYYY-MM-DD HH:mm:ss'),
-
-    //添加投票信息
           
 
 /****************************************************前台事件************************************ */
@@ -379,109 +455,97 @@ $("#end").change(function () {
     end = new Date(endTime.replace("-", "/").replace("-", "/"));
 });
 
-// 判断文字选项的内容是否相同
-var tf=false;
-$("#xuanxiang").find("li").last().on("blur","input",function(){
-    var xx_item = [];
-    $("#xuanxiang").find("input").map(function (i) {
-        xx_item.push($(this).val());
-    });
-    console.log('$("#xuanxiang").find("input"):'+$("#xuanxiang").find("input").length);
-    console.log("xx_item:" + xx_item);
-    for (var i = 0; i < xx_item.length; i++) {
-        for (var j = i + 1; j < xx_item.length; j++) {
-            if (xx_item[i] == xx_item[j]) {
-                tf = true;
-            }else{
-                tf = false;
-            }
-        }
-    }
-});
+
 
 // 点击发布按钮进行必填判断
-(function () {
-    var tag;
-    $(".submit").click(function () {
-        var txt = 0;
+// (function () {
+//     var tag;
+//     $(".submit").click(function () {
+//         var txt = 0;
 
-        // if(sysDate > begin){
-        //     console.log("dayu");
-        // }
+//         // if(sysDate > begin){
+//         //     console.log("dayu");
+//         // }
 
-        // 判断文字选项中已填选项的个数
-        $("#xuanxiang").find("input").map(function (i) {
-            // xx_item.push($(this).val());
-            if ($(this).val() != "") { //统计选项有值的数量，至少要有2个选项不能为空
-                txt++;
-            }
-        });
+//         // 判断文字选项中已填选项的个数
+//         $("#xuanxiang").find("input").map(function (i) {
+//             // xx_item.push($(this).val());
+//             if ($(this).val() != "") { //统计选项有值的数量，至少要有2个选项不能为空
+//                 txt++;
+//             }
+//         });
 
-        if ($("#biaoti").val() == "") {
-            tag = 0;
-        } else if ($("#miaoshu").val() == "") {
-            tag = 1;
-        } else if (txt == 0) { //投票选项不能为空
-            tag = 2;
-        } else if (txt == 1) { //至少两个投票选项已填
-            tag = 3;
-        } else if (tf) {
-            tag = 4;
-        } else if ($("#begin").val() == "") {
-            tag = 5;
-        } else if(sysDate > begin){
-            tag = 6;
-        } else if ($("#end").val() == "") {
-            tag = 7;
-        } else if (begin > end) {
-            tag = 8;
-        } else {
-            tag = 9;
-        }
-        switch (tag) {
-            case 0:
-                alert("请输入投票标题");
-                break;
-            case 1:
-                alert("请输入投票描述");
-                break;
-            case 2:
-                alert("请输入投票选项");
-                break;
-            case 3:
-                alert("投票的选项不能少于2个");
-                break;
-            case 4:
-                alert("投票选项的内容不能相同");
-                break;
-            case 5:
-                alert("开始时间不能为空");
-                break;
-            case 6:
-                alert("开始时间不能小于当前时间");
-                break;
-            case 7:
-                alert("结束时间不能为空");
-                break;
-            case 8:
-                alert("开始时间不能大于结束时间");
-                break;
-            case 9:
-                fbcg();
-                break;
-        }
-    });
-})();
+//         if ($("#biaoti").val() == "") {
+//             tag = 0;
+//         } else if ($("#miaoshu").val() == "") {
+//             tag = 1;
+//         } else if (txt == 0) { //投票选项不能为空
+//             tag = 2;
+//         } else if (txt == 1) { //至少两个投票选项已填
+//             tag = 3;
+//         } else if (tf) {
+//             tag = 4;
+//         } else if ($("#begin").val() == "") {
+//             tag = 5;
+//         } else if(sysDate > begin){
+//             tag = 6;
+//         } else if ($("#end").val() == "") {
+//             tag = 7;
+//         } else if (begin > end) {
+//             tag = 8;
+//         } else {
+//             tag = 9;
+//         }
+//         switch (tag) {
+//             case 0:
+//                 alert("请输入投票标题");
+//                 break;
+//             case 1:
+//                 alert("请输入投票描述");
+//                 break;
+//             case 2:
+//                 alert("请输入投票选项");
+//                 break;
+//             case 3:
+//                 alert("投票的选项不能少于2个");
+//                 break;
+//             case 4:
+//                 alert("投票选项的内容不能相同");
+//                 break;
+//             case 5:
+//                 alert("开始时间不能为空");
+//                 break;
+//             case 6:
+//                 alert("开始时间不能小于当前时间");
+//                 break;
+//             case 7:
+//                 alert("结束时间不能为空");
+//                 break;
+//             case 8:
+//                 alert("开始时间不能大于结束时间");
+//                 break;
+//             case 9:
+//                 fbcg();
+//                 break;
+//         }
+//     });
+// })();
 
 })
 // 发布成功时页面的跳转以及返回时清空添加页面中的输入内容
 function fbcg() {
     alert("发布成功");
-    $(".sub").attr("href", "list.html");
-    $(".article").find("input,textarea").map(function () {
-        $(this).val("");
-    });
+    $(".sub").attr("href", "index.html");
 }
+
+
+
+
+
+
+
+
+
 //弹出自定义提示窗口
 var showAlert= function(msg, url){
 //弹框存在

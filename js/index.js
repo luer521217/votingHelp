@@ -2,7 +2,6 @@
 
 $(document).ready(function () {
 
-    //*************************************************************************************************************** 首页index.html
     // tab切换
     $(".index-tab-ul").find("li").click(function () {
         $(".index-tab-ul").find("li").eq($(this).index()).addClass("selected").siblings("li").removeClass("selected");
@@ -22,10 +21,11 @@ $(document).ready(function () {
         }
     });
     
-    $(".will-list").find("li").click(function(){
-        alert("投票活动暂未开始");
-        $(this).find("a").removeAttr("href");
-    });
+    //未开始部分
+    // $(".will-list").find("li").click(function(){
+    //     alert("投票活动暂未开始");
+    //     $(this).find("a").removeAttr("href");
+    // });
 
 });
 

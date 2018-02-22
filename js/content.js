@@ -1,10 +1,6 @@
 $(function(){
 
-    var id = window
-            .location
-            .search
-            .split('=')[1];
-    console.log(id);
+    var id = window.location.search.split('=')[1];
     if(id){
         fetch(hostUrl +'/api/findVoteByAttr', {
             method: 'POST',
@@ -20,12 +16,13 @@ $(function(){
             $(".OLI").hide();
 
             $(".cy").children("span").eq(0).html(res.add_rs);
-            rsf(res.add_rs);
-            $(".title").html(res.vtitle);//标题
-            $(".desc").html(res.vDesc);//描述
-            $(".begin").html(res.start_time);//开始时间
-            $(".end").html(res.end_time);//结束时间
-            $(".nicheng").html(res.name);//昵称
+            //rsf(res.add_rs);
+
+            $(".title").html(res.vtitle);  //标题
+            $(".desc").html(res.vDesc);   //描述
+            $(".begin").html(res.start_time);  //开始时间
+            // $(".end").html(res.end_time); //结束时间
+            $(".nicheng").html(res.name);  //昵称
             //实名、匿名投票
             if(res.status){
                 $(".niming-left").children("span").eq(0).html("实名投票");
@@ -34,36 +31,41 @@ $(function(){
             }
             // 单、多选
             if(res.v_type){
+                //多选
                 $(".duo").show().addClass("a1");
                 $(".dan").hide();
                 duo(res.select_max);
             }else{
+                //单选
                 $(".duo").hide();
                 $(".dan").show().addClass("a1");
                 dan();
             }
             // 选项类型
             if(res.img_type){
+                //有图片投票
                 $(".tup-xuanxiang").show();
                 $(".wenzi-xuanxiang").hide();
             }else{
+                //无图片投票
                 $(".tup-xuanxiang").hide();
                 $(".wenzi-xuanxiang").show();
             }
             // 文字选项
             if(res.sel_txt.length){
+                console.log(res.sel_txt.length);
                 for(var i=0;i < res.sel_txt.length; i++){
                     $(".wenzi-xuanxiang").append('<li><span  class="xx">'+ res.sel_txt[i]+'</span><span class="check"></span><p class="xuanxiang-desc"><progress class="processbar" max="100" value="44"></progress><label>44</label></p></li>');
                 }
             }
-            var nowTime = moment().format("YYYY-MM-DD");
-            var now=new Date(nowTime).getTime();
-            var e_t = new Date(moment(res.end_time).format("YYYY-MM-DD")).getTime();
-            console.log(e_t);
-            console.log(now);
-            if(now > e_t){
-                panduan(true);
-            }
+            // var nowTime = moment().format("YYYY-MM-DD");
+            // var now=new Date(nowTime).getTime();
+            // var e_t = new Date(moment(res.end_time).format("YYYY-MM-DD")).getTime();
+            // console.log(e_t);
+            // console.log(now);
+            // if(now > e_t){
+            //     panduan(true);
+            // }
         })
     }
 
@@ -76,7 +78,7 @@ $(function(){
         $("body").addClass("chuantou");
     })
 
-    // 编辑       // 可以编辑结束时间、描述（）不管是活动的前中后都只能编辑时间与描述
+    // 编辑       // 可以编辑结束时间、描述（不管是活动的前中后都只能编辑时间与描述)
     $("#bianji").click(function () {
         // 编辑时需要进行数据回填，将现有的详情页面的数据回填到发起页面或新页面中
         if (confirm("您确认要修改该投票活动吗？")) { //会刷新页面
@@ -223,7 +225,7 @@ function panduan(data){
     }
 }
 
-   // 单选与多选
+// 单选与多选
 function dan() {
     $("body").on("click",".check",function(){
         $(this).parent("li").addClass("xz").siblings("li").removeClass("xz");
@@ -247,6 +249,18 @@ function rsf(data) {
     $(".cy").find("span").eq(0).html(data);
     console.log(data+"-------asdfasdfas");
 }
+
+
+
+
+
+
+
+
+
+
+
+
 //弹出自定义提示窗口
 var showAlert= function(msg, url){
     //弹框存在
